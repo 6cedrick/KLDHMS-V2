@@ -26,6 +26,7 @@ public class login extends javax.swing.JFrame {
         initComponents();
          setLocationRelativeTo(null);
        setResizable(false);
+        
     
         try {
             Connection();
@@ -115,6 +116,11 @@ public class login extends javax.swing.JFrame {
         blogin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         blogin.setForeground(new java.awt.Color(255, 255, 255));
         blogin.setText("LOGIN");
+        blogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bloginMouseClicked(evt);
+            }
+        });
         blogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bloginActionPerformed(evt);
@@ -309,6 +315,10 @@ public class login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabel8MouseClicked
 
+    private void bloginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bloginMouseClicked
+        
+    }//GEN-LAST:event_bloginMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -363,4 +373,8 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JTextField jtuser;
     private javax.swing.JCheckBox show;
     // End of variables declaration//GEN-END:variables
+
+    private void checkUserCredentials(String enteredUsername, String enteredPassword) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

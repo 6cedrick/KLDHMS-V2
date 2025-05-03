@@ -14,6 +14,8 @@ public class mslot extends javax.swing.JFrame {
      */
     public mslot() {
         initComponents();
+        setLocationRelativeTo(null);
+       setResizable(false);
     }
 
     /**
@@ -118,7 +120,7 @@ public class mslot extends javax.swing.JFrame {
 
         jLabel19.setText("You can only book 1 doctor at a time");
 
-        jButton1.setText("Done");
+        jButton1.setText("Confirm");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
