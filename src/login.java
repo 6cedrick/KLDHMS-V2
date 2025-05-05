@@ -38,7 +38,7 @@ public class login extends javax.swing.JFrame {
      Connection con;
     Statement st;
     
-    private static final String DbName = "kldhms";
+    private static final String DbName = "kldmas";
     private static final String DbDriver = "com.mysql.cj.jdbc.Driver";
     private static final String DbUrl = "jdbc:mysql://localhost:3306/" + DbName;
     private static final String DbUsername = "root";
@@ -270,16 +270,16 @@ public class login extends javax.swing.JFrame {
 
     private void bloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloginActionPerformed
         // TODO add your handling code here:
-         String username = jtuser.getText();
+         String KldEmail = jtuser.getText();
     String password = new String(jpassword.getPassword());  // safer way
 
-    if (username.equals("")) {
+    if (KldEmail.equals("")) {
         JOptionPane.showMessageDialog(null, "Please Enter a username");
     } else if (password.equals("")) {
         JOptionPane.showMessageDialog(null, "Please enter a password!");
     } else {
         try {
-            String query = "SELECT * FROM useraccount WHERE username='" + username + "' AND password='" + password + "'";
+            String query = "SELECT * FROM useraccount WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";
             var rs = st.executeQuery(query);
 
             if (rs.next()) {
@@ -289,7 +289,7 @@ public class login extends javax.swing.JFrame {
                 new homep().setVisible(true);
             } else {
                 // User not found
-                JOptionPane.showMessageDialog(null, "Wrong Username or Password");
+                JOptionPane.showMessageDialog(null, "Wrong Email or Password");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Database error: " + ex.getMessage());

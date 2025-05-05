@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2025 at 03:15 PM
+-- Generation Time: May 05, 2025 at 12:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -47,6 +47,20 @@ INSERT INTO `appointment` (`Appointment_ID`, `Date`, `Time`, `Status`, `Patient_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `BookID` int(11) NOT NULL,
+  `Doctor_ID` int(11) NOT NULL,
+  `F_NAME` varchar(100) NOT NULL,
+  `date` date NOT NULL,
+  `time_slot` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `doctor`
 --
 
@@ -63,6 +77,18 @@ CREATE TABLE `doctor` (
 INSERT INTO `doctor` (`Doctor_ID`, `DoctorName`, `ContactInfo`) VALUES
 (201, 'Dr.Tung tung\r\n', '0917-123-4567'),
 (202, 'Dr. Invinsible\r\n\r\n', '0922-987-6543');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctors`
+--
+
+CREATE TABLE `doctors` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `specialty` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -132,28 +158,6 @@ INSERT INTO `patient` (`Patient_ID`, `Patient_Fname`, `Patient_Lname`, `Gender`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schedule`
---
-
-CREATE TABLE `schedule` (
-  `Schedule_Id` int(11) NOT NULL,
-  `Doctor_ID` int(11) DEFAULT NULL,
-  `StartTime` time DEFAULT NULL,
-  `EndTime` time DEFAULT NULL,
-  `DayOfWeek` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `schedule`
---
-
-INSERT INTO `schedule` (`Schedule_Id`, `Doctor_ID`, `StartTime`, `EndTime`, `DayOfWeek`) VALUES
-(301, 201, '08:00:00', '12:00:00', 'Monday'),
-(302, 202, '13:00:00', '17:00:00', 'Tuesday');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `specialization`
 --
 
@@ -192,7 +196,9 @@ CREATE TABLE `useraccount` (
 INSERT INTO `useraccount` (`UserId`, `Username`, `Password`, `Name`, `KldID`, `KldEmail`) VALUES
 (1, 'patient_john', 'pass1234', '', 0, ''),
 (2, 'patient_anna', 'anna4567', '', 0, ''),
-(7, 'ced213', '1234', 'cedrick', 2025, 'cedrick@gmail.com');
+(7, 'ced213', '1234', 'cedrick', 2025, 'cedrick@gmail.com'),
+(11, 'ced123', 'ced123', 'ced', 2025, 'cgarcia@gmail.com'),
+(13, 'ced@kld.edu.ph', '123', 'ced', 2025, 'garcia');
 
 --
 -- Indexes for dumped tables
@@ -207,10 +213,23 @@ ALTER TABLE `appointment`
   ADD KEY `Doctor_ID` (`Doctor_ID`);
 
 --
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`BookID`),
+  ADD KEY `doctor_id` (`Doctor_ID`);
+
+--
 -- Indexes for table `doctor`
 --
 ALTER TABLE `doctor`
   ADD PRIMARY KEY (`Doctor_ID`);
+
+--
+-- Indexes for table `doctors`
+--
+ALTER TABLE `doctors`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `doctorspecialization`
@@ -236,13 +255,6 @@ ALTER TABLE `patient`
   ADD KEY `UserId` (`UserId`);
 
 --
--- Indexes for table `schedule`
---
-ALTER TABLE `schedule`
-  ADD PRIMARY KEY (`Schedule_Id`),
-  ADD KEY `Doctor_ID` (`Doctor_ID`);
-
---
 -- Indexes for table `specialization`
 --
 ALTER TABLE `specialization`
@@ -259,10 +271,22 @@ ALTER TABLE `useraccount`
 --
 
 --
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `BookID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `doctors`
+--
+ALTER TABLE `doctors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `useraccount`
 --
 ALTER TABLE `useraccount`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -274,6 +298,12 @@ ALTER TABLE `useraccount`
 ALTER TABLE `appointment`
   ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`Patient_ID`) REFERENCES `patient` (`Patient_ID`),
   ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`Doctor_ID`) REFERENCES `doctor` (`Doctor_ID`);
+
+--
+-- Constraints for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`Doctor_ID`) REFERENCES `doctors` (`id`);
 
 --
 -- Constraints for table `doctorspecialization`
@@ -294,12 +324,6 @@ ALTER TABLE `medicalrecord`
 --
 ALTER TABLE `patient`
   ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `useraccount` (`UserId`);
-
---
--- Constraints for table `schedule`
---
-ALTER TABLE `schedule`
-  ADD CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`Doctor_ID`) REFERENCES `doctor` (`Doctor_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

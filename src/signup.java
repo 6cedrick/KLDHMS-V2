@@ -37,7 +37,7 @@ public class signup extends javax.swing.JFrame {
     Connection con;
     Statement st;
     
-    private static final String DbName = "kldhms";
+    private static final String DbName = "kldmas";
     private static final String DbDriver = "com.mysql.cj.jdbc.Driver";
     private static final String DbUrl = "jdbc:mysql://localhost:3306/" + DbName;
     private static final String DbUsername = "root";
@@ -77,7 +77,7 @@ public class signup extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtLogUsername = new javax.swing.JTextField();
+        txtLogKLDEmail = new javax.swing.JTextField();
         TxtPassword = new javax.swing.JPasswordField();
         jcpassword = new javax.swing.JPasswordField();
         show = new javax.swing.JCheckBox();
@@ -87,7 +87,7 @@ public class signup extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtLogName = new javax.swing.JTextField();
         txtLogKldID = new javax.swing.JTextField();
-        txtLogKldEmail = new javax.swing.JTextField();
+        txtLogLname = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -108,12 +108,12 @@ public class signup extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Password:");
 
-        txtLogUsername.setBackground(new java.awt.Color(102, 102, 102));
-        txtLogUsername.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtLogUsername.setForeground(new java.awt.Color(255, 255, 255));
-        txtLogUsername.addActionListener(new java.awt.event.ActionListener() {
+        txtLogKLDEmail.setBackground(new java.awt.Color(102, 102, 102));
+        txtLogKLDEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtLogKLDEmail.setForeground(new java.awt.Color(255, 255, 255));
+        txtLogKLDEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLogUsernameActionPerformed(evt);
+                txtLogKLDEmailActionPerformed(evt);
             }
         });
 
@@ -160,7 +160,7 @@ public class signup extends javax.swing.JFrame {
         });
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Username");
+        jLabel2.setText("Last Name");
 
         txtLogName.setBackground(new java.awt.Color(102, 102, 102));
         txtLogName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -180,17 +180,17 @@ public class signup extends javax.swing.JFrame {
             }
         });
 
-        txtLogKldEmail.setBackground(new java.awt.Color(102, 102, 102));
-        txtLogKldEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtLogKldEmail.setForeground(new java.awt.Color(255, 255, 255));
-        txtLogKldEmail.addActionListener(new java.awt.event.ActionListener() {
+        txtLogLname.setBackground(new java.awt.Color(102, 102, 102));
+        txtLogLname.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtLogLname.setForeground(new java.awt.Color(255, 255, 255));
+        txtLogLname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLogKldEmailActionPerformed(evt);
+                txtLogLnameActionPerformed(evt);
             }
         });
 
         jLabel7.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Name");
+        jLabel7.setText("First Name");
 
         jLabel8.setBackground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("KLD ID");
@@ -218,40 +218,54 @@ public class signup extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(show))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtLogName, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtLogKldID, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtLogKldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txtLogUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtLogName, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtLogKldID, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(txtLogKLDEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtLogLname, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                                     .addComponent(TxtPassword)
-                                    .addComponent(jcpassword, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(58, 58, 58))))
+                                    .addComponent(jcpassword)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGap(84, 84, 84))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(132, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,8 +288,8 @@ public class signup extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLogUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLogName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLogName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLogLname, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,7 +305,7 @@ public class signup extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLogKldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLogKLDEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(show)
                 .addGap(14, 14, 14)
@@ -338,10 +352,10 @@ public class signup extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtLogUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLogUsernameActionPerformed
+    private void txtLogKLDEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLogKLDEmailActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_txtLogUsernameActionPerformed
+    }//GEN-LAST:event_txtLogKLDEmailActionPerformed
 
     private void showActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showActionPerformed
         // TODO add your handling code here:
@@ -358,12 +372,13 @@ public class signup extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-   String Username = txtLogUsername.getText();
+   String KldEmail = txtLogKLDEmail.getText();
     String Password = String.valueOf(TxtPassword.getPassword());
     String confirmPassword = String.valueOf(jcpassword.getPassword());
-    String Name = txtLogName.getText();
+    String F_Name = txtLogName.getText();
     String KldID = txtLogKldID.getText();
-    String KldEmail = txtLogKldEmail.getText();
+    String L_Name = txtLogLname.getText();
+    String Name = F_Name + " " + L_Name;
 
     if (!Password.equals(confirmPassword)) {
         System.out.println("Passwords do not match!");
@@ -371,11 +386,14 @@ public class signup extends javax.swing.JFrame {
     }
 
     try {
-        String query = "INSERT INTO useraccount (Username, Password, Name, KldID, KldEmail) VALUES ('" 
-                        + Username + "', '" 
+        String query = "INSERT INTO useraccount (Password, F_Name, L_Name, Name,KldID,KldEmail) VALUES ('" 
+                       
                         + Password + "', '" 
-                        + Name + "', '" 
-                        + KldID + "', '" 
+                        + F_Name + " ', '" 
+               
+                        + L_Name + "', '" 
+                 +Name + "', '"
+                 + KldID + "', '" 
                         + KldEmail + "')";
         st.executeUpdate(query);
         System.out.println("User registered successfully!");
@@ -400,9 +418,9 @@ public class signup extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLogKldIDActionPerformed
 
-    private void txtLogKldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLogKldEmailActionPerformed
+    private void txtLogLnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLogLnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtLogKldEmailActionPerformed
+    }//GEN-LAST:event_txtLogLnameActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
@@ -465,9 +483,9 @@ public class signup extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jcpassword;
     private javax.swing.JCheckBox show;
-    private javax.swing.JTextField txtLogKldEmail;
+    private javax.swing.JTextField txtLogKLDEmail;
     private javax.swing.JTextField txtLogKldID;
+    private javax.swing.JTextField txtLogLname;
     private javax.swing.JTextField txtLogName;
-    private javax.swing.JTextField txtLogUsername;
     // End of variables declaration//GEN-END:variables
 }

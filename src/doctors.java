@@ -199,7 +199,7 @@ public class doctors extends javax.swing.JFrame {
 
         jLabel5.setBackground(new java.awt.Color(0, 153, 153));
         jLabel5.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\doctor1Icon.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\doctor2.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -251,15 +251,15 @@ public class doctors extends javax.swing.JFrame {
 
         jLabel6.setBackground(new java.awt.Color(0, 153, 153));
         jLabel6.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\doctor1Icon.png")); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\doctor5.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
