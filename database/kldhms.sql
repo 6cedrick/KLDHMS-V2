@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2025 at 12:38 PM
+-- Generation Time: May 08, 2025 at 03:46 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,65 +18,32 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kldhms`
+-- Database: `kldmas`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `appointment`
+-- Table structure for table `apointment`
 --
 
-CREATE TABLE `appointment` (
-  `Appointment_ID` int(11) NOT NULL,
-  `Date` date DEFAULT NULL,
-  `Time` time DEFAULT NULL,
-  `Status` varchar(20) DEFAULT NULL,
-  `Patient_ID` int(11) DEFAULT NULL,
-  `Doctor_ID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `appointment`
---
-
-INSERT INTO `appointment` (`Appointment_ID`, `Date`, `Time`, `Status`, `Patient_ID`, `Doctor_ID`) VALUES
-(401, '2025-05-01', '09:00:00', 'Confirmed', 101, 201),
-(402, '2025-05-02', '14:00:00', 'Pending', 102, 202);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `bookings`
---
-
-CREATE TABLE `bookings` (
-  `BookID` int(11) NOT NULL,
-  `Doctor_ID` int(11) NOT NULL,
-  `F_NAME` varchar(100) NOT NULL,
-  `date` date NOT NULL,
-  `time_slot` time NOT NULL
+CREATE TABLE `apointment` (
+  `Apointment_ID` int(11) NOT NULL,
+  `Date` date NOT NULL,
+  `Time` time NOT NULL,
+  `Status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `doctor`
+-- Table structure for table `department`
 --
 
-CREATE TABLE `doctor` (
-  `Doctor_ID` int(11) NOT NULL,
-  `DoctorName` varchar(100) DEFAULT NULL,
-  `ContactInfo` varchar(50) DEFAULT NULL
+CREATE TABLE `department` (
+  `DepartmentID` int(11) NOT NULL,
+  `DepartmentName` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `doctor`
---
-
-INSERT INTO `doctor` (`Doctor_ID`, `DoctorName`, `ContactInfo`) VALUES
-(201, 'Dr.Tung tung\r\n', '0917-123-4567'),
-(202, 'Dr. Invinsible\r\n\r\n', '0922-987-6543');
 
 -- --------------------------------------------------------
 
@@ -85,94 +52,11 @@ INSERT INTO `doctor` (`Doctor_ID`, `DoctorName`, `ContactInfo`) VALUES
 --
 
 CREATE TABLE `doctors` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `specialty` varchar(100) DEFAULT NULL
+  `Doctor_ID` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `DepartmentID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `doctorspecialization`
---
-
-CREATE TABLE `doctorspecialization` (
-  `DoctorSpecialization_ID` int(11) NOT NULL,
-  `Doctor_ID` int(11) DEFAULT NULL,
-  `Specialization_ID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `doctorspecialization`
---
-
-INSERT INTO `doctorspecialization` (`DoctorSpecialization_ID`, `Doctor_ID`, `Specialization_ID`) VALUES
-(1, 201, 1),
-(2, 202, 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `medicalrecord`
---
-
-CREATE TABLE `medicalrecord` (
-  `Record_ID` int(11) NOT NULL,
-  `Patient_ID` int(11) DEFAULT NULL,
-  `Doctor_ID` int(11) DEFAULT NULL,
-  `Diagnosis` varchar(100) DEFAULT NULL,
-  `Treatment` varchar(100) DEFAULT NULL,
-  `Date_Recorded` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `medicalrecord`
---
-
-INSERT INTO `medicalrecord` (`Record_ID`, `Patient_ID`, `Doctor_ID`, `Diagnosis`, `Treatment`, `Date_Recorded`) VALUES
-(501, 101, 201, 'Hypertension', 'Medication', '2025-04-20'),
-(502, 102, 202, 'Skin Allergy', 'Cream Treatment', '2025-04-22');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `patient`
---
-
-CREATE TABLE `patient` (
-  `Patient_ID` int(11) NOT NULL,
-  `Patient_Fname` varchar(50) DEFAULT NULL,
-  `Patient_Lname` varchar(50) DEFAULT NULL,
-  `Gender` varchar(10) DEFAULT NULL,
-  `UserId` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `patient`
---
-
-INSERT INTO `patient` (`Patient_ID`, `Patient_Fname`, `Patient_Lname`, `Gender`, `UserId`) VALUES
-(101, 'John', 'Doe', 'Male', 1),
-(102, 'Anna', 'Smith', 'Female', 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `specialization`
---
-
-CREATE TABLE `specialization` (
-  `Specialization_ID` int(11) NOT NULL,
-  `Name` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `specialization`
---
-
-INSERT INTO `specialization` (`Specialization_ID`, `Name`) VALUES
-(1, 'Cardiologist'),
-(2, 'Dermatologist');
 
 -- --------------------------------------------------------
 
@@ -181,149 +65,120 @@ INSERT INTO `specialization` (`Specialization_ID`, `Name`) VALUES
 --
 
 CREATE TABLE `useraccount` (
-  `UserId` int(11) NOT NULL,
-  `Username` varchar(50) DEFAULT NULL,
-  `Password` varchar(50) DEFAULT NULL,
-  `Name` varchar(255) NOT NULL,
-  `KldID` int(11) NOT NULL,
-  `KldEmail` varchar(255) NOT NULL
+  `UserID` int(11) NOT NULL,
+  `KldEmail` varchar(255) NOT NULL,
+  `Password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `useraccount`
 --
 
-INSERT INTO `useraccount` (`UserId`, `Username`, `Password`, `Name`, `KldID`, `KldEmail`) VALUES
-(1, 'patient_john', 'pass1234', '', 0, ''),
-(2, 'patient_anna', 'anna4567', '', 0, ''),
-(7, 'ced213', '1234', 'cedrick', 2025, 'cedrick@gmail.com'),
-(11, 'ced123', 'ced123', 'ced', 2025, 'cgarcia@gmail.com'),
-(13, 'ced@kld.edu.ph', '123', 'ced', 2025, 'garcia');
+INSERT INTO `useraccount` (`UserID`, `KldEmail`, `Password`) VALUES
+(2, '12@kld.edu.ph', '1234'),
+(3, '123@kld.edu.ph', '12345'),
+(4, '1234@kld.edu.ph', '12345'),
+(5, '5', '6');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userinfo`
+--
+
+CREATE TABLE `userinfo` (
+  `UserInfoID` int(11) NOT NULL,
+  `UserID` int(11) DEFAULT NULL,
+  `FullName` varchar(255) DEFAULT NULL,
+  `F_name` varchar(255) DEFAULT NULL,
+  `L_name` varchar(255) DEFAULT NULL,
+  `Age` varchar(100) NOT NULL,
+  `KldID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `userinfo`
+--
+
+INSERT INTO `userinfo` (`UserInfoID`, `UserID`, `FullName`, `F_name`, `L_name`, `Age`, `KldID`) VALUES
+(1, 2, 'John louie Yaneza', 'John louie', 'Yaneza', '', 123),
+(2, NULL, 'Cedrick Garcia', 'Cedrick', 'Garcia', '', 123),
+(3, 4, 'Lourence Lumaad', 'Lourence', 'Lumaad', '', 456),
+(4, 5, '1 2', '1', '2', '3', 4);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `appointment`
+-- Indexes for table `department`
 --
-ALTER TABLE `appointment`
-  ADD PRIMARY KEY (`Appointment_ID`),
-  ADD KEY `Patient_ID` (`Patient_ID`),
-  ADD KEY `Doctor_ID` (`Doctor_ID`);
-
---
--- Indexes for table `bookings`
---
-ALTER TABLE `bookings`
-  ADD PRIMARY KEY (`BookID`),
-  ADD KEY `doctor_id` (`Doctor_ID`);
-
---
--- Indexes for table `doctor`
---
-ALTER TABLE `doctor`
-  ADD PRIMARY KEY (`Doctor_ID`);
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`DepartmentID`);
 
 --
 -- Indexes for table `doctors`
 --
 ALTER TABLE `doctors`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `doctorspecialization`
---
-ALTER TABLE `doctorspecialization`
-  ADD PRIMARY KEY (`DoctorSpecialization_ID`),
-  ADD KEY `Doctor_ID` (`Doctor_ID`),
-  ADD KEY `Specialization_ID` (`Specialization_ID`);
-
---
--- Indexes for table `medicalrecord`
---
-ALTER TABLE `medicalrecord`
-  ADD PRIMARY KEY (`Record_ID`),
-  ADD KEY `Patient_ID` (`Patient_ID`),
-  ADD KEY `Doctor_ID` (`Doctor_ID`);
-
---
--- Indexes for table `patient`
---
-ALTER TABLE `patient`
-  ADD PRIMARY KEY (`Patient_ID`),
-  ADD KEY `UserId` (`UserId`);
-
---
--- Indexes for table `specialization`
---
-ALTER TABLE `specialization`
-  ADD PRIMARY KEY (`Specialization_ID`);
+  ADD PRIMARY KEY (`Doctor_ID`),
+  ADD KEY `fk_department` (`DepartmentID`);
 
 --
 -- Indexes for table `useraccount`
 --
 ALTER TABLE `useraccount`
-  ADD PRIMARY KEY (`UserId`);
+  ADD PRIMARY KEY (`UserID`);
+
+--
+-- Indexes for table `userinfo`
+--
+ALTER TABLE `userinfo`
+  ADD PRIMARY KEY (`UserInfoID`),
+  ADD KEY `UserID` (`UserID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `bookings`
+-- AUTO_INCREMENT for table `department`
 --
-ALTER TABLE `bookings`
-  MODIFY `BookID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `department`
+  MODIFY `DepartmentID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Doctor_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `useraccount`
 --
 ALTER TABLE `useraccount`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `userinfo`
+--
+ALTER TABLE `userinfo`
+  MODIFY `UserInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `appointment`
+-- Constraints for table `doctors`
 --
-ALTER TABLE `appointment`
-  ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`Patient_ID`) REFERENCES `patient` (`Patient_ID`),
-  ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`Doctor_ID`) REFERENCES `doctor` (`Doctor_ID`);
+ALTER TABLE `doctors`
+  ADD CONSTRAINT `fk_department` FOREIGN KEY (`DepartmentID`) REFERENCES `department` (`DepartmentID`);
 
 --
--- Constraints for table `bookings`
+-- Constraints for table `userinfo`
 --
-ALTER TABLE `bookings`
-  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`Doctor_ID`) REFERENCES `doctors` (`id`);
-
---
--- Constraints for table `doctorspecialization`
---
-ALTER TABLE `doctorspecialization`
-  ADD CONSTRAINT `doctorspecialization_ibfk_1` FOREIGN KEY (`Doctor_ID`) REFERENCES `doctor` (`Doctor_ID`),
-  ADD CONSTRAINT `doctorspecialization_ibfk_2` FOREIGN KEY (`Specialization_ID`) REFERENCES `specialization` (`Specialization_ID`);
-
---
--- Constraints for table `medicalrecord`
---
-ALTER TABLE `medicalrecord`
-  ADD CONSTRAINT `medicalrecord_ibfk_1` FOREIGN KEY (`Patient_ID`) REFERENCES `patient` (`Patient_ID`),
-  ADD CONSTRAINT `medicalrecord_ibfk_2` FOREIGN KEY (`Doctor_ID`) REFERENCES `doctor` (`Doctor_ID`);
-
---
--- Constraints for table `patient`
---
-ALTER TABLE `patient`
-  ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `useraccount` (`UserId`);
+ALTER TABLE `userinfo`
+  ADD CONSTRAINT `userinfo_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `useraccount` (`UserID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
