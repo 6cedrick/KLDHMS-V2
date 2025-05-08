@@ -1,3 +1,10 @@
+
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.Connection;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,7 +21,46 @@ public class signup2 extends javax.swing.JFrame {
      */
     public signup2() {
         initComponents();
+          setLocationRelativeTo(null);
+       setResizable(false);
+    
+        try {
+            Connection();
+        } catch (SQLException ex) {
+            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
+    
+    Connection con;
+    Statement st;
+    
+    private static final String DbName = "kldmas";
+    private static final String DbDriver = "com.mysql.cj.jdbc.Driver";
+    private static final String DbUrl = "jdbc:mysql://localhost:3306/" + DbName;
+    private static final String DbUsername = "root";
+    private static final String DbPassword = "";
+    
+    public void Connection() throws SQLException{
+        try {
+            Class.forName(DbDriver);
+            con = DriverManager.getConnection(DbUrl, DbUsername, DbPassword);
+            st = con.createStatement();
+            if (con != null){
+            System.out.println("Connection successful");
+            }
+                
+                
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,8 +83,8 @@ public class signup2 extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtLogName = new javax.swing.JTextField();
-        txtLogKldID = new javax.swing.JTextField();
+        txtLogFName = new javax.swing.JTextField();
+        txtLogLID = new javax.swing.JTextField();
         txtLogLname = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -114,21 +160,21 @@ public class signup2 extends javax.swing.JFrame {
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Last Name");
 
-        txtLogName.setBackground(new java.awt.Color(102, 102, 102));
-        txtLogName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtLogName.setForeground(new java.awt.Color(255, 255, 255));
-        txtLogName.addActionListener(new java.awt.event.ActionListener() {
+        txtLogFName.setBackground(new java.awt.Color(102, 102, 102));
+        txtLogFName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtLogFName.setForeground(new java.awt.Color(255, 255, 255));
+        txtLogFName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLogNameActionPerformed(evt);
+                txtLogFNameActionPerformed(evt);
             }
         });
 
-        txtLogKldID.setBackground(new java.awt.Color(102, 102, 102));
-        txtLogKldID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtLogKldID.setForeground(new java.awt.Color(255, 255, 255));
-        txtLogKldID.addActionListener(new java.awt.event.ActionListener() {
+        txtLogLID.setBackground(new java.awt.Color(102, 102, 102));
+        txtLogLID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtLogLID.setForeground(new java.awt.Color(255, 255, 255));
+        txtLogLID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLogKldIDActionPerformed(evt);
+                txtLogLIDActionPerformed(evt);
             }
         });
 
@@ -142,10 +188,10 @@ public class signup2 extends javax.swing.JFrame {
         });
 
         jLabel7.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Name");
+        jLabel7.setText("First Name");
 
         jLabel8.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Last Name");
+        jLabel8.setText("License ID");
 
         jLabel9.setBackground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("KLD Email");
@@ -156,7 +202,6 @@ public class signup2 extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("REGISTRATION FOR DOCTORS");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -172,10 +217,10 @@ public class signup2 extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtLogName, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtLogFName, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtLogKldID, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtLogLID, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtLogKLDEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -230,7 +275,7 @@ public class signup2 extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLogName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLogFName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLogLname, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -239,7 +284,7 @@ public class signup2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLogKldID, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLogLID, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -321,6 +366,47 @@ public class signup2 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        String F_name = txtLogFName.getText();
+        String L_name = txtLogLname.getText();
+        String Name = F_name + " " + L_name;
+        String L_ID = txtLogLID.getText();
+        String Password = String.valueOf(TxtPassword.getPassword());
+        String confirmPassword = String.valueOf(jcpassword.getPassword());
+        String KldEmail = txtLogKLDEmail.getText();
+        
+          if (!Password.equals(confirmPassword)) {
+        System.out.println("Passwords do not match!");
+        return;
+    }
+
+    try {
+        // Insert into useraccount
+        String query = "INSERT INTO doctor_accounts (Password, KldEmail) VALUES ('" 
+                        + Password + "', '" 
+                        + KldEmail + "')";
+        st.executeUpdate(query);
+
+        // Get the last inserted ID
+        var rs = st.executeQuery("SELECT LAST_INSERT_ID()");
+        int doctor_id = 0;
+        if (rs.next()) {
+            doctor_id = rs.getInt(1);
+        }
+
+        // Insert into userinfo using the retrieved UserID
+        String query1 = "INSERT INTO doctor_infos (doctor_id, F_Name, L_Name, full_name, License_ID ) VALUES ('" 
+                        + doctor_id + "', '" 
+                        + F_name + "', '" 
+                        + L_name + "', '" 
+                        + Name + "', '" 
+                        + L_ID + "')";
+        st.executeUpdate(query1);
+
+        System.out.println("User registered successfully!");
+    } catch (SQLException ex) {
+        Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+    }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -331,13 +417,13 @@ public class signup2 extends javax.swing.JFrame {
         new login().setVisible(true);
     }//GEN-LAST:event_jLabel6MouseClicked
     
-    private void txtLogNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLogNameActionPerformed
+    private void txtLogFNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLogFNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtLogNameActionPerformed
+    }//GEN-LAST:event_txtLogFNameActionPerformed
 
-    private void txtLogKldIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLogKldIDActionPerformed
+    private void txtLogLIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLogLIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtLogKldIDActionPerformed
+    }//GEN-LAST:event_txtLogLIDActionPerformed
 
     private void txtLogLnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLogLnameActionPerformed
         // TODO add your handling code here:
@@ -396,9 +482,9 @@ public class signup2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jcpassword;
     private javax.swing.JCheckBox show;
+    private javax.swing.JTextField txtLogFName;
     private javax.swing.JTextField txtLogKLDEmail;
-    private javax.swing.JTextField txtLogKldID;
+    private javax.swing.JTextField txtLogLID;
     private javax.swing.JTextField txtLogLname;
-    private javax.swing.JTextField txtLogName;
     // End of variables declaration//GEN-END:variables
 }
