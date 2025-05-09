@@ -361,9 +361,15 @@ public class mslot extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        this.setVisible(false);
+        // this.setVisible(false);
 
-        new receipt().setVisible(true);
+        
+    if (jCheckBox3.isSelected()) disableOtherBookings(jCheckBox3);
+    else if (jCheckBox4.isSelected()) disableOtherBookings(jCheckBox4);
+    else if (jCheckBox5.isSelected()) disableOtherBookings(jCheckBox5);
+    else if (jCheckBox6.isSelected()) disableOtherBookings(jCheckBox6);
+    new receipt().setVisible(true);
+    
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
@@ -385,7 +391,26 @@ public class mslot extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    
+private void disableOtherBookings(javax.swing.JCheckBox selectedBox) {
+    jCheckBox3.setEnabled(false);
+    jCheckBox4.setEnabled(false);
+    jCheckBox5.setEnabled(false);
+    jCheckBox6.setEnabled(false);
+    selectedBox.setText("BOOKED");
+    selectedBox.setSelected(true);
+}
+
+
+private javax.swing.JCheckBox getSelectedCheckBox() {
+    if (jCheckBox3.isSelected()) return jCheckBox3;
+    if (jCheckBox4.isSelected()) return jCheckBox4;
+    if (jCheckBox5.isSelected()) return jCheckBox5;
+    if (jCheckBox6.isSelected()) return jCheckBox6;
+    return null;
+}
+
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
