@@ -311,7 +311,7 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
 
-        new signup().setVisible(true);
+        new chooser1().setVisible(true);
 
     }//GEN-LAST:event_jLabel8MouseClicked
 
