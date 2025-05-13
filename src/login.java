@@ -38,7 +38,7 @@ public class login extends javax.swing.JFrame {
      Connection con;
     Statement st;
     
-    private static final String DbName = "kldmas";
+    private static final String DbName = "kldmass";
     private static final String DbDriver = "com.mysql.cj.jdbc.Driver";
     private static final String DbUrl = "jdbc:mysql://localhost:3306/" + DbName;
     private static final String DbUsername = "root";
@@ -270,8 +270,8 @@ public class login extends javax.swing.JFrame {
 
     private void bloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloginActionPerformed
         // TODO add your handling code here:
-         String KldEmail = jtuser.getText();
-    String password = new String(jpassword.getPassword());  // safer way
+String KldEmail = jtuser.getText();
+    String password = new String(jpassword.getPassword());
 
     if (KldEmail.equals("")) {
         JOptionPane.showMessageDialog(null, "Please Enter a username");
@@ -279,17 +279,24 @@ public class login extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Please enter a password!");
     } else {
         try {
-            String query = "SELECT * FROM useraccount WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";
-            var rs = st.executeQuery(query);
+            // First, check in useraccount
+            String queryUser = "SELECT * FROM useraccount WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";
+            var rsUser = st.executeQuery(queryUser);
 
-            if (rs.next()) {
-                // User found, login success!
-                
+            if (rsUser.next()) {
                 this.setVisible(false);
-                new homep().setVisible(true);
+                new homep().setVisible(true);  // User home
             } else {
-                // User not found
-                JOptionPane.showMessageDialog(null, "Wrong Email or Password");
+                // If not found in useraccount, check doctor_accounts
+                String queryDoctor = "SELECT * FROM doctor_accounts WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";
+                var rsDoctor = st.executeQuery(queryDoctor);
+
+                if (rsDoctor.next()) {
+                    this.setVisible(false);
+                    new doctorH().setVisible(true);  // Doctor home
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong Email or Password");
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Database error: " + ex.getMessage());

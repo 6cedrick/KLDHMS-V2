@@ -14,10 +14,11 @@ import javax.swing.JMenuItem;
 public class homep extends javax.swing.JFrame {
 
     /**
-     * Creates new form homep
+     * Creates new form 
      */
     public homep() {
         initComponents();
+        
          setExtendedState(JFrame.MAXIMIZED_BOTH); 
         JMenuItem item1 = new JMenuItem("About Us");
     JMenuItem item2 = new JMenuItem("Contact Us");
@@ -96,7 +97,7 @@ public class homep extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        Usertxt = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -205,10 +206,19 @@ public class homep extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(51, 204, 0));
         jLabel1.setText("Welcome");
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 0));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel2.setText("USER");
+        Usertxt.setBackground(new java.awt.Color(255, 255, 0));
+        Usertxt.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        Usertxt.setForeground(new java.awt.Color(255, 255, 0));
+        Usertxt.setText("USER");
+        Usertxt.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                UsertxtAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -235,7 +245,7 @@ public class homep extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Usertxt, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(1452, Short.MAX_VALUE))
@@ -246,7 +256,7 @@ public class homep extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(Usertxt)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(9, 9, 9)
@@ -315,6 +325,10 @@ public class homep extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
+    private void UsertxtAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_UsertxtAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UsertxtAncestorAdded
+
     /**
      * @param args the command line arguments
      */
@@ -351,8 +365,8 @@ public class homep extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Usertxt;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

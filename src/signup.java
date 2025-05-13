@@ -9,7 +9,11 @@
  *
  * @author 6scee
  */
-
+import java.sql.SQLDataException;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.SQLSyntaxErrorException;
+import java.sql.SQLNonTransientConnectionException;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -17,6 +21,7 @@ import java.util.logging.Logger;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 public class signup extends javax.swing.JFrame {
 
    
@@ -35,7 +40,7 @@ public class signup extends javax.swing.JFrame {
     Connection con;
     Statement st;
     
-    private static final String DbName = "kldmas";
+    private static final String DbName = "kldmass";
     private static final String DbDriver = "com.mysql.cj.jdbc.Driver";
     private static final String DbUrl = "jdbc:mysql://localhost:3306/" + DbName;
     private static final String DbUsername = "root";
@@ -408,21 +413,53 @@ public class signup extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-    String KldEmail = txtLogKLDEmail.getText();
+String KldEmail = txtLogKLDEmail.getText();
     String Password = String.valueOf(TxtPassword.getPassword());
     String confirmPassword = String.valueOf(jcpassword.getPassword());
     String F_Name = txtLogName.getText();
     String KldID = txtLogKldID.getText();
     String L_Name = txtLogLname.getText();
     String Name = F_Name + " " + L_Name;
-       String Age = TxtAge.getText();
+    String Age = TxtAge.getText();
 
-    if (!Password.equals(confirmPassword)) {
-        System.out.println("Passwords do not match!");
+    // 🚨 Input validation BEFORE inserting anything
+    if (KldEmail.isEmpty() || Password.isEmpty() || confirmPassword.isEmpty() ||
+        F_Name.isEmpty() || L_Name.isEmpty() || KldID.isEmpty() || Age.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please fill in all fields!");
         return;
     }
 
+    // ✅ Email must end with @kld.edu.ph
+    if (!KldEmail.endsWith("@kld.edu.ph")) {
+        JOptionPane.showMessageDialog(null, "Please use KLD email");
+        return;
+    }
+
+    // ✅ Passwords must match
+    if (!Password.equals(confirmPassword)) {
+        JOptionPane.showMessageDialog(null, "Passwords do not match!");
+        return;
+    }
+   try {
+    int ageValue = Integer.parseInt(Age);
+    if (ageValue < 17|| ageValue > 120) {
+        JOptionPane.showMessageDialog(null, "You must be 18 or older to Register");
+        return;
+    }
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(null, "Age must be a number!");
+    return;
+}
+
     try {
+        // ✅ Check if email already exists
+        String checkEmailQuery = "SELECT * FROM useraccount WHERE KldEmail = '" + KldEmail + "'";
+        var rsCheck = st.executeQuery(checkEmailQuery);
+        if (rsCheck.next()) {
+            JOptionPane.showMessageDialog(null, "Email already registered!");
+            return;
+        }
+
         // Insert into useraccount
         String query = "INSERT INTO useraccount (Password, KldEmail) VALUES ('" 
                         + Password + "', '" 
@@ -437,20 +474,31 @@ public class signup extends javax.swing.JFrame {
         }
 
         // Insert into userinfo using the retrieved UserID
-        String query1 = "INSERT INTO userinfo (UserID, F_Name, L_Name, FullName,Age, KldID ) VALUES ('" 
+        String query1 = "INSERT INTO userinfo (UserID, F_Name, L_Name, FullName, Age, KldID ) VALUES ('" 
                         + userID + "', '" 
                         + F_Name + "', '" 
                         + L_Name + "', '" 
                         + Name + "', '" 
-                         + Age + "', '" 
+                        + Age + "', '" 
                         + KldID + "')";
         st.executeUpdate(query1);
 
-        System.out.println("User registered successfully!");
-    } catch (SQLException ex) {
-        Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        JOptionPane.showMessageDialog(null, "User registered successfully!");
 
+        this.setVisible(false);
+        new homep().setVisible(true);
+
+    } catch (SQLIntegrityConstraintViolationException e) {
+        JOptionPane.showMessageDialog(null, "Duplicate entry or constraint violation.\n" + e.getMessage(), "Registration Error", JOptionPane.ERROR_MESSAGE);
+    } catch (SQLSyntaxErrorException e) {
+        JOptionPane.showMessageDialog(null, "There is a syntax error in your SQL.\n" + e.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
+    } catch (SQLDataException e) {
+        JOptionPane.showMessageDialog(null, "Invalid data format.\n" + e.getMessage(), "Data Error", JOptionPane.ERROR_MESSAGE);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "General SQL error.\n" + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Unexpected error occurred.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked

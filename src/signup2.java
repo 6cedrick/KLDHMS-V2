@@ -20,6 +20,10 @@ public class signup2 extends javax.swing.JFrame {
      * Creates new form signup2
      */
     public signup2() {
+          /**
+     * Creates new form signup2
+     */
+    
         initComponents();
           setLocationRelativeTo(null);
        setResizable(false);
@@ -32,10 +36,11 @@ public class signup2 extends javax.swing.JFrame {
         
     }
     
+    
     Connection con;
     Statement st;
     
-    private static final String DbName = "kldmas";
+    private static final String DbName = "kldmass";
     private static final String DbDriver = "com.mysql.cj.jdbc.Driver";
     private static final String DbUrl = "jdbc:mysql://localhost:3306/" + DbName;
     private static final String DbUsername = "root";

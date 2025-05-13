@@ -207,7 +207,7 @@
                       <Component id="jLabel6" alignment="0" min="-2" pref="429" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="0" min="-2" pref="429" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
+                      <Component id="Usertxt" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="0" min="-2" pref="429" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="0" min="-2" pref="462" max="-2" attributes="0"/>
                   </Group>
@@ -221,7 +221,7 @@
                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="Usertxt" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
@@ -250,7 +250,7 @@
             <Property name="text" type="java.lang.String" value="Welcome"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="Usertxt">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="ff" red="ff" type="rgb"/>
@@ -263,6 +263,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="USER"/>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="UsertxtAncestorAdded"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
