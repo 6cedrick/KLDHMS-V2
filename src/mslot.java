@@ -7,16 +7,92 @@
  *
  * @author 6scee
  */
+import java.sql.*;
+import javax.swing.JOptionPane;
 public class mslot extends javax.swing.JFrame {
 
     /**
-     * Creates new form mslot
+     * Creates new form 
      */
-    public mslot() {
-        initComponents();
-        setLocationRelativeTo(null);
-       setResizable(false);
+    private int UserID;
+   public mslot(int UserID) {
+    this.UserID = UserID;
+    initComponents();
+    setLocationRelativeTo(null);
+    setResizable(false);
+}
+
+    mslot() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    public class DBHelper {
+    private static final String URL = "jdbc:mysql://localhost:3306/kldmass";
+    private static final String USER = "root";
+    private static final String PASS = "";
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASS);
+    }
+
+   public static void insertOngoingAppointment(int userId, String profileId, String timeSlot, int departmentId) {
+    String sql = "INSERT INTO ongoingbookings (UserID, profile_id, time_slot, DepartmentID) VALUES (?, ?, ?, ?)";
+    try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setInt(1, userId);
+        stmt.setString(2, profileId);
+        stmt.setString(3, timeSlot);
+        stmt.setInt(4, departmentId);
+        stmt.executeUpdate();
+        System.out.println("Appointment inserted successfully.");
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+   // INSERT THESE ↓↓↓
+public static class DoctorInfo {
+    public String profileId;
+    public int departmentId;
+
+    public DoctorInfo(String profileId, int departmentId) {
+        this.profileId = profileId;
+        this.departmentId = departmentId;
+    }
+}
+
+public static DoctorInfo getDoctorInfoByName(String doctorName) {
+    String sql = "SELECT profile_id, DepartmentID FROM doctor_infos  WHERE Dfull_name = ?";
+    try (Connection conn = getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, doctorName);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return new DoctorInfo(rs.getString("profile_id"), rs.getInt("DepartmentID"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+
+    public static void completeAppointment(String name) {
+        String moveSql = "INSERT INTO completedbookings (profile_id, DepartmentID, schedule) " +
+                         "SELECT profile_id, Department, schedule FROM OnGoingAppointment WHERE doctor_name = ?";
+        String deleteSql = "DELETE FROM ongoingbookings WHERE doctor_name = ?";
+        try (Connection conn = getConnection(); 
+             PreparedStatement insertStmt = conn.prepareStatement(moveSql);
+             PreparedStatement deleteStmt = conn.prepareStatement(deleteSql)) {
+            
+            insertStmt.setString(1, name);
+            insertStmt.executeUpdate();
+            
+            deleteStmt.setString(1, name);
+            deleteStmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -386,6 +462,41 @@ public class mslot extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+         String doctorName = null;
+
+    if (jCheckBox3.isSelected()) {
+        disableOtherBookings(jCheckBox3);
+        doctorName = "Dr. Strange";
+    } else if (jCheckBox4.isSelected()) {
+        disableOtherBookings(jCheckBox4);
+        doctorName = "Dr. Kiko";
+    } else if (jCheckBox5.isSelected()) {
+        disableOtherBookings(jCheckBox5);
+        doctorName = "Dr. Enzo";
+    } else if (jCheckBox6.isSelected()) {
+        disableOtherBookings(jCheckBox6);
+        doctorName = "Dr. Hanamichi";
+    }
+
+    if (doctorName != null) {
+        DBHelper.DoctorInfo info = DBHelper.getDoctorInfoByName(doctorName);
+        if (info != null) {
+            String timeSlot = "7:00am to 10:00am";
+            try {
+                DBHelper.insertOngoingAppointment(UserID, info.profileId, timeSlot, info.departmentId);
+                JOptionPane.showMessageDialog(this, "Appointment successfully booked!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                jButton1.setEnabled(false);
+                new receipt().setVisible(true);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error booking appointment. Please try again.", "Database Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Doctor not found in database.", "Lookup Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a doctor to book.", "No Selection", JOptionPane.WARNING_MESSAGE);
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -437,7 +548,7 @@ public static void main(String args[]) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new mslot().setVisible(true);
+                new mslot(1).setVisible(true);
             }
         });
     }

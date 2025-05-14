@@ -274,34 +274,36 @@ String KldEmail = jtuser.getText();
     String password = new String(jpassword.getPassword());
 
     if (KldEmail.equals("")) {
-        JOptionPane.showMessageDialog(null, "Please Enter a username");
-    } else if (password.equals("")) {
-        JOptionPane.showMessageDialog(null, "Please enter a password!");
-    } else {
-        try {
-            // First, check in useraccount
-            String queryUser = "SELECT * FROM useraccount WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";
-            var rsUser = st.executeQuery(queryUser);
+    JOptionPane.showMessageDialog(null, "Please Enter a KLD Email");
+} else if (password.equals("")) {
+    JOptionPane.showMessageDialog(null, "Please enter a password!");
+} else {
+    try {
+        // First, check in useraccount
+        String queryUser = "SELECT * FROM useraccount WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";
+        var rsUser = st.executeQuery(queryUser);
 
-            if (rsUser.next()) {
+        if (rsUser.next()) {
+            int userId = rsUser.getInt("UserID");
+            this.setVisible(false);
+            new homep(userId).setVisible(true);  // ✅ Launch user home with ID
+        } else {
+            // Check doctor_accounts if not in useraccount
+            String queryDoctor = "SELECT * FROM doctor_accounts WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";
+            var rsDoctor = st.executeQuery(queryDoctor);
+
+            if (rsDoctor.next()) {
+                int doctorId = rsDoctor.getInt("doctor_id");
                 this.setVisible(false);
-                new homep().setVisible(true);  // User home
+                new doctorH(doctorId).setVisible(true);  // ✅ Launch doctor home with ID
             } else {
-                // If not found in useraccount, check doctor_accounts
-                String queryDoctor = "SELECT * FROM doctor_accounts WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";
-                var rsDoctor = st.executeQuery(queryDoctor);
-
-                if (rsDoctor.next()) {
-                    this.setVisible(false);
-                    new doctorH().setVisible(true);  // Doctor home
-                } else {
-                    JOptionPane.showMessageDialog(null, "Wrong Email or Password");
-                }
+                JOptionPane.showMessageDialog(null, "Wrong Email or Password");
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Database error: " + ex.getMessage());
         }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Database error: " + ex.getMessage());
     }
+}
     }//GEN-LAST:event_bloginActionPerformed
 
     private void showActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showActionPerformed
@@ -318,7 +320,7 @@ String KldEmail = jtuser.getText();
         // TODO add your handling code here:
         this.setVisible(false);
 
-        new chooser1().setVisible(true);
+        new signup().setVisible(true);
 
     }//GEN-LAST:event_jLabel8MouseClicked
 

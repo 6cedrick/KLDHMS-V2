@@ -1,5 +1,8 @@
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -15,9 +18,88 @@ public class slots extends javax.swing.JFrame {
     /**
      * Creates new form slots
      */
-    public slots() {
+    private int userId;
+    private JPopupMenu jPopupMenu2;
+    public slots(int userId) {
         initComponents();
-         setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        this.userId = userId;
+        
+         jPopupMenu2 = new javax.swing.JPopupMenu();
+
+// Initialize and add menu items
+JMenuItem item1 = new JMenuItem("About Us");
+JMenuItem item2 = new JMenuItem("Contact Us");
+JMenuItem item3 = new JMenuItem("Admin Panel");
+JMenuItem item4 = new JMenuItem("Settings");
+JMenuItem item5 = new JMenuItem("Logout");
+
+// Set font
+java.awt.Font menuFont = new java.awt.Font("Arial", java.awt.Font.PLAIN, 18);
+for (JMenuItem item : new JMenuItem[]{item1, item2, item3, item4, item5}) {
+    item.setFont(menuFont);
+}
+
+// Spacing item
+JMenuItem emptyItem = new JMenuItem(" ");
+emptyItem.setEnabled(false);
+emptyItem.setPreferredSize(new java.awt.Dimension(150, 70));
+
+// Add items
+jPopupMenu2.add(item1);
+jPopupMenu2.add(item2);
+jPopupMenu2.add(item3);
+jPopupMenu2.add(item4);
+jPopupMenu2.add(emptyItem);
+jPopupMenu2.add(item5);
+
+// Action listeners
+item1.addActionListener(e -> {
+    this.setVisible(false);
+    new aboutUS().setVisible(true);
+});
+item2.addActionListener(e -> {
+    this.setVisible(false);
+    new contactUS().setVisible(true);
+});
+item3.addActionListener(e -> {
+    this.setVisible(false);
+    new Admin().setVisible(true);
+});
+item4.addActionListener(e -> {
+    this.setVisible(false);
+    new settingsP(userId).setVisible(true);
+});
+item5.addActionListener(e -> {
+    this.setVisible(false);
+    new login().setVisible(true);
+});
+
+// Right-click menu (handle cross-platform trigger correctly)
+Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
+    @Override
+    public void mousePressed(java.awt.event.MouseEvent evt) {
+        if (evt.isPopupTrigger()) {
+            jPopupMenu2.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }
+
+    @Override
+    public void mouseReleased(java.awt.event.MouseEvent evt) {
+        if (evt.isPopupTrigger()) {
+            jPopupMenu2.show(evt.getComponent(), evt.getX(), evt.getY());
+       
+        
+
+        }
+    }
+
+    @Override
+    public void mouseClicked(java.awt.event.MouseEvent evt) {
+        if (!evt.isPopupTrigger()) {
+            jPopupMenu2.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }
+});
     }
 
     /**
@@ -45,7 +127,7 @@ public class slots extends javax.swing.JFrame {
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        Menubar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -242,13 +324,13 @@ public class slots extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\kdlogo - tab.png")); // NOI18N
 
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("≡");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        Menubar.setBackground(new java.awt.Color(255, 255, 255));
+        Menubar.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
+        Menubar.setForeground(new java.awt.Color(255, 255, 255));
+        Menubar.setText("≡");
+        Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                MenubarMouseClicked(evt);
             }
         });
 
@@ -265,7 +347,7 @@ public class slots extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
-                .addComponent(jLabel8)
+                .addComponent(Menubar)
                 .addGap(46, 46, 46))
         );
         jPanel1Layout.setVerticalGroup(
@@ -280,7 +362,7 @@ public class slots extends javax.swing.JFrame {
                         .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Menubar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -313,25 +395,28 @@ public class slots extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+       
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jToggleButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton2MouseClicked
         // TODO add your handling code here:
-        this.setVisible(false);
-
-        new doctors().setVisible(true);
+        
     }//GEN-LAST:event_jToggleButton2MouseClicked
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+
+        new doctors(userId).setVisible(true);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton3MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
 
-        new homep().setVisible(true);
+        new homep(userId).setVisible(true);
     }//GEN-LAST:event_jToggleButton3MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -350,11 +435,11 @@ public class slots extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+    private void MenubarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenubarMouseClicked
         // TODO add your handling code here:
-        
+                  jPopupMenu2.show(Menubar, evt.getX(), evt.getY());
 
-    }//GEN-LAST:event_jLabel8MouseClicked
+    }//GEN-LAST:event_MenubarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -386,12 +471,13 @@ public class slots extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new slots().setVisible(true);
+                new slots(1).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Menubar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -399,7 +485,6 @@ public class slots extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -410,4 +495,6 @@ public class slots extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     // End of variables declaration//GEN-END:variables
+
+    
 }

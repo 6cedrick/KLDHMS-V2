@@ -12,70 +12,94 @@ import javax.swing.JMenuItem;
  * @author 6scee
  */
 public class homep extends javax.swing.JFrame {
-
+private int loggedInId;
+    private int userId;
     /**
      * Creates new form 
      */
-    public homep() {
-        initComponents();
-        
-         setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        JMenuItem item1 = new JMenuItem("About Us");
-    JMenuItem item2 = new JMenuItem("Contact Us");
-    JMenuItem item3 = new JMenuItem("Admin Panel");
-    JMenuItem item4 = new JMenuItem("Logout");
+    public homep(int userId) {
+         initComponents();
+    this.userId = userId;
+    this.loggedInId = userId;
+        // Initialize popup menu
+jPopupMenu2 = new javax.swing.JPopupMenu();
 
-    // Set font size for larger items (optional, but you can adjust)
-    item1.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 18));  
-    item2.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 18));  
-    item3.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 18));  
-    item4.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 18));  
+// Initialize and add menu items
+JMenuItem item1 = new JMenuItem("About Us");
+JMenuItem item2 = new JMenuItem("Contact Us");
+JMenuItem item3 = new JMenuItem("Admin Panel");
+JMenuItem item4 = new JMenuItem("Settings");
+JMenuItem item5 = new JMenuItem("Logout");
 
-    // Create an empty item for spacing
-    JMenuItem emptyItem = new JMenuItem(" ");
-    emptyItem.setEnabled(false);  // Disable it so it can't be clicked
-    
-    // Set preferred size for spacing effect (adjust if you want bigger space)
-    emptyItem.setPreferredSize(new java.awt.Dimension(150, 70));  // Creates vertical space
+// Set font
+java.awt.Font menuFont = new java.awt.Font("Arial", java.awt.Font.PLAIN, 18);
+for (JMenuItem item : new JMenuItem[]{item1, item2, item3, item4, item5}) {
+    item.setFont(menuFont);
+}
 
-    // Add items to the popup menu
-    jPopupMenu2.add(item1);
-    jPopupMenu2.add(item2);
-    
-    jPopupMenu2.add(emptyItem); 
-    jPopupMenu2.add(item4);  // Logout at the bottom
+// Spacing item
+JMenuItem emptyItem = new JMenuItem(" ");
+emptyItem.setEnabled(false);
+emptyItem.setPreferredSize(new java.awt.Dimension(150, 70));
 
-    // Handle item actions
-    item1.addActionListener(e -> {
-        System.out.println("About Us clicked");
-        // Handle the About Us action here
-        this.setVisible(false);
+// Add items
+jPopupMenu2.add(item1);
+jPopupMenu2.add(item2);
+jPopupMenu2.add(item3);
+jPopupMenu2.add(item4);
+jPopupMenu2.add(emptyItem);
+jPopupMenu2.add(item5);
 
-        new aboutUS().setVisible(true);
-    });
-    item2.addActionListener(e -> {
-        System.out.println("Contact Us clicked");
-        // Handle the Contact Us action here
-        this.setVisible(false);
+// Action listeners
+item1.addActionListener(e -> {
+    this.setVisible(false);
+    new aboutUS().setVisible(true);
+});
+item2.addActionListener(e -> {
+    this.setVisible(false);
+    new contactUS().setVisible(true);
+});
+item3.addActionListener(e -> {
+    this.setVisible(false);
+    new Admin().setVisible(true);
+});
+item4.addActionListener(e -> {
+    this.setVisible(false);
+    new settingsP(userId).setVisible(true);
+});
+item5.addActionListener(e -> {
+    this.setVisible(false);
+    new login().setVisible(true);
+});
 
-        new contactUS().setVisible(true);
-    });
- 
-    item4.addActionListener(e -> {
-        System.out.println("Logout clicked");
-        this.setVisible(false);
-
-        new login().setVisible(true);
-    });
-
-    // Right-click to show popup menu
-    jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mousePressed(java.awt.event.MouseEvent evt) {
-            if (evt.isPopupTrigger()) {
-                jPopupMenu2.show(jLabel8, evt.getX(), evt.getY());
-            }
+// Right-click menu (handle cross-platform trigger correctly)
+Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
+    @Override
+    public void mousePressed(java.awt.event.MouseEvent evt) {
+        if (evt.isPopupTrigger()) {
+            jPopupMenu2.show(evt.getComponent(), evt.getX(), evt.getY());
         }
-    });
+    }
+
+    @Override
+    public void mouseReleased(java.awt.event.MouseEvent evt) {
+        if (evt.isPopupTrigger()) {
+            jPopupMenu2.show(evt.getComponent(), evt.getX(), evt.getY());
+       
+        
+
+        }
+    }
+
+    @Override
+    public void mouseClicked(java.awt.event.MouseEvent evt) {
+        if (!evt.isPopupTrigger()) {
+            jPopupMenu2.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }
+});
+
+       
     }
 
 
@@ -90,11 +114,11 @@ public class homep extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         jPanel1 = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        slots = new javax.swing.JToggleButton();
+        doctors = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        Menubar = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Usertxt = new javax.swing.JLabel();
@@ -118,31 +142,31 @@ public class homep extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        jToggleButton1.setBackground(new java.awt.Color(0, 102, 0));
-        jToggleButton1.setForeground(new java.awt.Color(255, 255, 0));
-        jToggleButton1.setText("SLOTS");
-        jToggleButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        slots.setBackground(new java.awt.Color(0, 102, 0));
+        slots.setForeground(new java.awt.Color(255, 255, 0));
+        slots.setText("SLOTS");
+        slots.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jToggleButton1MouseClicked(evt);
+                slotsMouseClicked(evt);
             }
         });
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        slots.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                slotsActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setBackground(new java.awt.Color(51, 102, 0));
-        jToggleButton2.setForeground(new java.awt.Color(255, 255, 0));
-        jToggleButton2.setText("DOCTORS");
-        jToggleButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        doctors.setBackground(new java.awt.Color(51, 102, 0));
+        doctors.setForeground(new java.awt.Color(255, 255, 0));
+        doctors.setText("DOCTORS");
+        doctors.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jToggleButton2MouseClicked(evt);
+                doctorsMouseClicked(evt);
             }
         });
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        doctors.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                doctorsActionPerformed(evt);
             }
         });
 
@@ -160,13 +184,13 @@ public class homep extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("≡");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        Menubar.setBackground(new java.awt.Color(255, 255, 255));
+        Menubar.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
+        Menubar.setForeground(new java.awt.Color(255, 255, 255));
+        Menubar.setText("≡");
+        Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                MenubarMouseClicked(evt);
             }
         });
 
@@ -179,11 +203,11 @@ public class homep extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1374, Short.MAX_VALUE)
                 .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(slots, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(doctors, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(jLabel8)
+                .addComponent(Menubar)
                 .addGap(40, 40, 40))
         );
         jPanel1Layout.setVerticalGroup(
@@ -191,12 +215,12 @@ public class homep extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(slots, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(doctors, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(Menubar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jLabel7)
         );
 
@@ -328,42 +352,44 @@ public class homep extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseClicked
+    private void slotsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_slotsMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
 
-        new slots().setVisible(true);
-    }//GEN-LAST:event_jToggleButton1MouseClicked
+        new slots(userId).setVisible(true);
+    }//GEN-LAST:event_slotsMouseClicked
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void slotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_slotsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_slotsActionPerformed
 
-    private void jToggleButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton2MouseClicked
+    private void doctorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorsMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
 
-        new doctors().setVisible(true);
-    }//GEN-LAST:event_jToggleButton2MouseClicked
+        new doctors(userId).setVisible(true);
+        
+    }//GEN-LAST:event_doctorsMouseClicked
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void doctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }//GEN-LAST:event_doctorsActionPerformed
 
     private void jToggleButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton3MouseClicked
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jToggleButton3MouseClicked
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+    private void MenubarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenubarMouseClicked
         // TODO add your handling code here:
-         jPopupMenu2.show(jLabel8, evt.getX(), evt.getY());
+         jPopupMenu2.show(Menubar, evt.getX(), evt.getY());
 
         
-    }//GEN-LAST:event_jLabel8MouseClicked
+    }//GEN-LAST:event_MenubarMouseClicked
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void UsertxtAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_UsertxtAncestorAdded
@@ -400,13 +426,15 @@ public class homep extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new homep().setVisible(true);
+                new homep(1).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Menubar;
     private javax.swing.JLabel Usertxt;
+    private javax.swing.JToggleButton doctors;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -414,7 +442,6 @@ public class homep extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -425,8 +452,7 @@ public class homep extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton slots;
     // End of variables declaration//GEN-END:variables
 }
