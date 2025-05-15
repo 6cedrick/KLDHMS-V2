@@ -108,7 +108,6 @@ private String loggedInType;
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -133,6 +132,11 @@ private String loggedInType;
         jPanel5.setBackground(new java.awt.Color(0, 51, 0));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel2MouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -140,6 +144,13 @@ private String loggedInType;
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
+            }
+        });
+
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\RightArrowicon.png")); // NOI18N
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
             }
         });
 
@@ -161,7 +172,7 @@ private String loggedInType;
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -172,6 +183,13 @@ private String loggedInType;
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
+            }
+        });
+
+        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\RightArrowicon.png")); // NOI18N
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
             }
         });
 
@@ -202,6 +220,8 @@ private String loggedInType;
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Account info");
 
+        jLabel12.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\RightArrowicon.png")); // NOI18N
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -223,9 +243,6 @@ private String loggedInType;
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("SETTINGS");
-
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel16.setText("SETTINGS");
 
@@ -240,11 +257,6 @@ private String loggedInType;
                 .addGap(74, 74, 74)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,16 +265,11 @@ private String loggedInType;
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(32, 32, 32)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(198, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jPanel1.setBackground(new java.awt.Color(0, 80, 25));
@@ -518,7 +525,7 @@ private String loggedInType;
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
          this.setVisible(false);
-    new settingpersonal(1).setVisible(true);
+    new settingpersonal(loggedInId).setVisible(true);
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -527,6 +534,22 @@ private String loggedInType;
     new settingAp(1).setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
 
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        // TODO add your handling code here:
+          this.setVisible(false);
+    new settingpersonal(loggedInId).setVisible(true);
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+    new AppointmentH().setVisible(true);
+    }//GEN-LAST:event_jLabel11MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -534,7 +557,6 @@ private String loggedInType;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton SaveTXT;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

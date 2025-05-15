@@ -1,6 +1,8 @@
 
 import javax.swing.JFrame;
-
+import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.*;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -15,9 +17,78 @@ public class reports extends javax.swing.JFrame {
     /**
      * Creates new form reports
      */
-    public reports() {
+    private int userId;
+    public reports(int userId) {
+          this.userId = userId;
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        loadCheckupData();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        
+    }
+    private Connection connect() {
+    try {
+        String url = "jdbc:mysql://localhost:3306/kldmass";
+        String user = "root"; // 🔁 your MySQL username
+        String password = ""; // 🔁 your MySQL password
+        return DriverManager.getConnection(url, user, password);
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
+    private void loadCheckupData() {
+    DefaultTableModel model = new DefaultTableModel();
+    model.setColumnIdentifiers(new String[] {
+        "Student Name", "Age", "Date", "Time Slot", "Doctor"
+    });
+
+   String query = """
+    SELECT 
+        ui.FullName AS student_name,
+        ui.Age,
+        b.date,
+        b.time_slot,
+        b.doctor_name
+    FROM 
+        bookings b
+    JOIN 
+        userinfo ui ON b.user_id = ui.UserID
+    WHERE 
+        b.user_id = ?
+""";
+
+
+    try (Connection conn = connect();
+     PreparedStatement pst = conn.prepareStatement(query)) {
+
+    pst.setInt(1, userId);  // ✅ Move this inside the try block
+
+    try (ResultSet rs = pst.executeQuery()) {
+        boolean hasRows = false;
+
+        while (rs.next()) {
+            hasRows = true;
+            System.out.println("Loaded: " + rs.getString("student_name"));
+            model.addRow(new Object[]{
+                rs.getString("student_name"),
+                rs.getInt("Age"),
+                rs.getDate("date"),
+                rs.getString("time_slot"),
+                rs.getString("doctor_name")
+            });
+        }
+
+        if (!hasRows) {
+            System.out.println("No checkup data found.");
+        }
+
+        jTable1.setModel(model);
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace();
+}
     }
 
     /**
@@ -282,13 +353,13 @@ public class reports extends javax.swing.JFrame {
     private void jLabel47MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel47MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-    new Admin().setVisible(true);
+    new Admin(userId).setVisible(true);
     }//GEN-LAST:event_jLabel47MouseClicked
 
     private void jLabel49MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel49MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-    new AdminD().setVisible(true);
+    new AdminD(userId).setVisible(true);
     }//GEN-LAST:event_jLabel49MouseClicked
 
     /**
@@ -321,7 +392,7 @@ public class reports extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new reports().setVisible(true);
+                new reports(1).setVisible(true);
             }
         });
     }

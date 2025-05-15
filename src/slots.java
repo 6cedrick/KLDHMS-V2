@@ -63,7 +63,7 @@ item2.addActionListener(e -> {
 });
 item3.addActionListener(e -> {
     this.setVisible(false);
-    new Admin().setVisible(true);
+    new Admin(userId).setVisible(true);
 });
 item4.addActionListener(e -> {
     this.setVisible(false);
@@ -115,13 +115,13 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        bookingmonday = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        bookingwednesday = new javax.swing.JButton();
+        jlabel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        bookingfriday = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
@@ -139,15 +139,15 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Monday");
 
-        jButton1.setText("BOOK");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        bookingmonday.setText("BOOK");
+        bookingmonday.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                bookingmondayMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bookingmonday.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bookingmondayActionPerformed(evt);
             }
         });
 
@@ -161,7 +161,7 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addContainerGap(235, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(bookingmonday)
                 .addGap(16, 16, 16))
         );
         jPanel5Layout.setVerticalGroup(
@@ -170,89 +170,89 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(bookingmonday)
                 .addGap(16, 16, 16))
         );
 
-        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel8.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Wednesday");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Wednesday");
 
-        jButton2.setText("BOOK");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        bookingwednesday.setText("BOOK");
+        bookingwednesday.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                bookingwednesdayMouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bookingwednesday.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bookingwednesdayActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(235, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(bookingwednesday)
                 .addGap(16, 16, 16))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(bookingwednesday)
                 .addGap(16, 16, 16))
         );
 
-        jPanel7.setBackground(new java.awt.Color(51, 51, 51));
+        jlabel.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Tuesday");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Friday");
 
-        jButton3.setText("BOOK");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        bookingfriday.setText("BOOK");
+        bookingfriday.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                bookingfridayMouseClicked(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        bookingfriday.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bookingfridayActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout jlabelLayout = new javax.swing.GroupLayout(jlabel);
+        jlabel.setLayout(jlabelLayout);
+        jlabelLayout.setHorizontalGroup(
+            jlabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jlabelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(235, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jlabelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(bookingfriday)
                 .addGap(16, 16, 16))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+        jlabelLayout.setVerticalGroup(
+            jlabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jlabelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(bookingfriday)
                 .addGap(16, 16, 16))
         );
 
@@ -263,20 +263,20 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addGap(119, 119, 119)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107)
+                .addComponent(jlabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(151, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(816, Short.MAX_VALUE))
         );
 
@@ -388,17 +388,17 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void bookingmondayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingmondayMouseClicked
         // TODO add your handling code here:
         new mslot().setVisible(true);
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_bookingmondayMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bookingmondayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingmondayActionPerformed
         // TODO add your handling code here:
         
        
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bookingmondayActionPerformed
 
     private void jToggleButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton2MouseClicked
         // TODO add your handling code here:
@@ -419,27 +419,30 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
         new homep(userId).setVisible(true);
     }//GEN-LAST:event_jToggleButton3MouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3MouseClicked
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void MenubarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenubarMouseClicked
         // TODO add your handling code here:
                   jPopupMenu2.show(Menubar, evt.getX(), evt.getY());
 
     }//GEN-LAST:event_MenubarMouseClicked
+
+    private void bookingwednesdayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingwednesdayMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+
+        new wslot().setVisible(true);
+    }//GEN-LAST:event_bookingwednesdayMouseClicked
+
+    private void bookingwednesdayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingwednesdayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bookingwednesdayActionPerformed
+
+    private void bookingfridayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingfridayMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bookingfridayMouseClicked
+
+    private void bookingfridayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingfridayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bookingfridayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -478,22 +481,22 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Menubar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton bookingfriday;
+    private javax.swing.JButton bookingmonday;
+    private javax.swing.JButton bookingwednesday;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JPanel jlabel;
     // End of variables declaration//GEN-END:variables
 
     

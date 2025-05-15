@@ -1,4 +1,7 @@
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 
@@ -21,6 +24,8 @@ private int loggedInId;
          initComponents();
     this.userId = userId;
     this.loggedInId = userId;
+LoadName();
+
         // Initialize popup menu
 jPopupMenu2 = new javax.swing.JPopupMenu();
 
@@ -61,7 +66,7 @@ item2.addActionListener(e -> {
 });
 item3.addActionListener(e -> {
     this.setVisible(false);
-    new Admin().setVisible(true);
+    new Admin(userId).setVisible(true);
 });
 item4.addActionListener(e -> {
     this.setVisible(false);
@@ -99,9 +104,45 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
     }
 });
 
-       
-    }
 
+    }
+         private void LoadName() {
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kldmass", "root", "");
+
+        String name = null;
+
+        // First, check in doctor table
+        PreparedStatement ps = conn.prepareStatement("SELECT F_Name FROM doctor_infos WHERE doctor_id = ?");
+        ps.setInt(1, loggedInId);
+        var rs = ps.executeQuery();
+        if (rs.next()) {
+            name = rs.getString("F_Name");
+        } else {
+            // If not found in doctor, check in user
+            ps = conn.prepareStatement("SELECT F_Name FROM userinfo WHERE UserID = ?");
+            ps.setInt(1, loggedInId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                name = rs.getString("F_Name");
+            }
+        }
+
+        if (name != null) {
+            Usertxt.setText(name + "!");
+        } else {
+            Usertxt.setText("Name not found.");
+        }
+
+        rs.close();
+        ps.close();
+        conn.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+        Usertxt.setText("Error loading email.");
+    }
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -126,9 +167,6 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -260,40 +298,6 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("the long lines.");
 
-        jPanel4.setBackground(new java.awt.Color(0, 102, 0));
-
-        jLabel2.setText("On going appointments");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(298, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(240, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -307,11 +311,7 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Usertxt, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addContainerGap(1452, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,9 +328,7 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addGap(74, 74, 74)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addContainerGap(630, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -436,7 +434,6 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JLabel Usertxt;
     private javax.swing.JToggleButton doctors;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -448,8 +445,6 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JToggleButton jToggleButton3;

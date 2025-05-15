@@ -174,6 +174,13 @@ public class AppointmentH extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Personal info");
 
+        jLabel13.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\RightArrowicon.png")); // NOI18N
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -195,11 +202,13 @@ public class AppointmentH extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Appointment History");
+
+        jLabel14.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\RightArrowicon.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -227,6 +236,16 @@ public class AppointmentH extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Account info");
+
+        jLabel16.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\RightArrowicon.png")); // NOI18N
+        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel16MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel16MouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -336,6 +355,22 @@ public class AppointmentH extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+    new settingpersonal(1).setVisible(true);
+    }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel16MouseEntered
+
+    private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+    new settingsP().setVisible(true);
+    }//GEN-LAST:event_jLabel16MouseClicked
 
     /**
      * @param args the command line arguments

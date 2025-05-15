@@ -23,6 +23,84 @@ public class settingpersonal extends javax.swing.JFrame {
     public settingpersonal(int userId) {
         initComponents();
         this.userId = userId;
+        LoadName();
+        LoadLname();    }
+    private void LoadName() {
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kldmass", "root", "");
+
+        String name = null;
+
+        // First, check in doctor table
+        PreparedStatement ps = conn.prepareStatement("SELECT F_Name FROM doctor_infos WHERE doctor_id = ?");
+        ps.setInt(1, userId);
+        var rs = ps.executeQuery();
+        if (rs.next()) {
+            name = rs.getString("F_Name");
+        } else {
+            // If not found in doctor, check in user
+            ps = conn.prepareStatement("SELECT F_Name FROM userinfo WHERE UserID = ?");
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                name = rs.getString("F_Name");
+            }
+        }
+
+        if (name != null) {
+            Fnametxt.setText(name);
+        } else {
+            Fnametxt.setText("Name not found.");
+        }
+
+        rs.close();
+        ps.close();
+        conn.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+        Fnametxt.setText("Error loading email.");
+    }
+    
+    }
+    
+    private void LoadLname() {
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kldmass", "root", "");
+
+        String Lname = null;
+
+        // First, check in doctor table
+        PreparedStatement ps = conn.prepareStatement("SELECT L_Name FROM doctor_infos WHERE doctor_id = ?");
+        ps.setInt(1, userId);
+        var rs = ps.executeQuery();
+        if (rs.next()) {
+            Lname = rs.getString("L_Name");
+        } else {
+            // If not found in doctor, check in user
+            ps = conn.prepareStatement("SELECT L_Name FROM userinfo WHERE UserID = ?");
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                Lname = rs.getString("L_Name");
+            }
+        }
+
+        if (Lname != null) {
+            Lnametxt.setText(Lname);
+        } else {
+            Lnametxt.setText("Last Name not found.");
+        }
+
+        rs.close();
+        ps.close();
+        conn.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+        Lnametxt.setText("Error loading email.");
+    }
+    
     }
 
     /**
@@ -74,9 +152,15 @@ public class settingpersonal extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Personal info");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         jLabel9.setBackground(new java.awt.Color(0, 153, 153));
         jLabel9.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\RightArrowicon.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -110,6 +194,13 @@ public class settingpersonal extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\RightArrowicon.png")); // NOI18N
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -139,6 +230,13 @@ public class settingpersonal extends javax.swing.JFrame {
         jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel10MouseClicked(evt);
+            }
+        });
+
+        jLabel12.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\RightArrowicon.png")); // NOI18N
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
             }
         });
 
@@ -288,6 +386,9 @@ public class settingpersonal extends javax.swing.JFrame {
 
     private void SaveTXT1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveTXT1ActionPerformed
         // TODO add your handling code here:
+        
+                
+        
         String Fname = Fnametxt.getText();
 String Lname = Lnametxt.getText();
 String ageText = agetxt.getText();
@@ -297,39 +398,60 @@ if (Fname.isEmpty() || Lname.isEmpty() || ageText.isEmpty()) {
     return;
 }
 
-int age;
+int age = 0;
 
 try {
-    age = Integer.parseInt(ageText); // Try parsing age
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kldmass", "root", "");
+        
+        
+        PreparedStatement check = conn.prepareStatement("SELECT * FROM userinfo WHERE UserID = ?" );
+        check.setInt(1, userId);  
+        var rs = check.executeQuery();
 
-    // Connect to DB
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kldmass", "root", "");
+        if (rs.next()) {
+            // Old password is correct — now update
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to update your Personal Information?", "Confirm", JOptionPane.YES_NO_OPTION);
 
-    // Insert the user data into table 'users'
-    String sql = "INSERT INTO userinfo (F_Name, L_Name, age) VALUES (?, ?, ?)";
-    PreparedStatement ps = conn.prepareStatement(sql);
-    ps.setString(1, Fname);
-    ps.setString(2, Lname);
-    ps.setInt(3, age);
+    if (confirm == JOptionPane.YES_OPTION) {
+        // Proceed with password update
+        PreparedStatement update = conn.prepareStatement("UPDATE userinfo SET L_Name = ? WHERE UserID = ?");
+        update.setString(1, Lname);
+        update.setInt(2, userId);
+        int rows = update.executeUpdate();
+        
+        PreparedStatement update1 = conn.prepareStatement("UPDATE useerinfo SET F_Name = ? WHERE UserID = ?");
+        update.setString(1, Fname);
+        update.setInt(2, userId);
+        int rows1 = update1.executeUpdate();
+        
+        PreparedStatement update2 = conn.prepareStatement("UPDATE usernfo SET age = ? WHERE UserID = ?");
+        update.setInt(1, age);
+        update.setInt(2, userId);
+        int rows2 = update2.executeUpdate();
 
-    int rows = ps.executeUpdate();
+        if (rows > 0) {
+            JOptionPane.showMessageDialog(this, "Password updated successfully.");
+        }
+    
 
-    if (rows > 0) {
-        JOptionPane.showMessageDialog(this, "User added successfully!");
-    } else {
-        JOptionPane.showMessageDialog(this, "Failed to add user.");
     }
+    else {
+                JOptionPane.showMessageDialog(this, "Update failed. Try again.");
+            }
 
-    conn.close();
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Old password is incorrect.");
+        }
 
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(this, "Please enter a valid number for age.");
-} catch (Exception e) {
-    e.printStackTrace();
-    JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-}
+        rs.close();
+        check.close();
+        conn.close();
 
-
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
 
     }//GEN-LAST:event_SaveTXT1ActionPerformed
 
@@ -341,9 +463,24 @@ try {
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         // TODO add your handling code here:
-         this.setVisible(false);
-    new settingsP().setVisible(true);
+         
     }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+    new settingsP().setVisible(true);
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+    new AppointmentH().setVisible(true);
+    }//GEN-LAST:event_jLabel11MouseClicked
 
     /**
      * @param args the command line arguments
