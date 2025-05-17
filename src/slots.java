@@ -102,6 +102,10 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
 });
     }
 
+    slots() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -137,7 +141,7 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Monday");
+        jLabel1.setText("Wednesday");
 
         bookingmonday.setText("BOOK");
         bookingmonday.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -178,7 +182,7 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Wednesday");
+        jLabel4.setText("Monday");
 
         bookingwednesday.setText("BOOK");
         bookingwednesday.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -261,23 +265,27 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(119, 119, 119)
+                .addGap(112, 112, 112)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107)
+                .addGap(106, 106, 106)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104)
                 .addComponent(jlabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(151, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(816, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(39, 39, 39)
+                            .addComponent(jlabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(810, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -390,12 +398,13 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
 
     private void bookingmondayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingmondayMouseClicked
         // TODO add your handling code here:
-        new mslot().setVisible(true);
+        
     }//GEN-LAST:event_bookingmondayMouseClicked
 
     private void bookingmondayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingmondayActionPerformed
-        // TODO add your handling code here:
-        
+ this.setVisible(false);
+    new wslot(userId).setVisible(true);               
+
        
 
     }//GEN-LAST:event_bookingmondayActionPerformed
@@ -429,11 +438,16 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
         // TODO add your handling code here:
         this.setVisible(false);
 
-        new wslot().setVisible(true);
+        new mslot(userId).setVisible(true);
     }//GEN-LAST:event_bookingwednesdayMouseClicked
 
     private void bookingwednesdayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingwednesdayActionPerformed
         // TODO add your handling code here:
+      this.setVisible(false);
+
+       
+new mslot(userId).setVisible(true);
+
     }//GEN-LAST:event_bookingwednesdayActionPerformed
 
     private void bookingfridayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingfridayMouseClicked
@@ -442,6 +456,7 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
 
     private void bookingfridayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingfridayActionPerformed
         // TODO add your handling code here:
+    
     }//GEN-LAST:event_bookingfridayActionPerformed
 
     /**

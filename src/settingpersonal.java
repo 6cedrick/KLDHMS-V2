@@ -473,13 +473,13 @@ try {
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-    new settingsP().setVisible(true);
+    new settingsP(userId).setVisible(true);
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-    new AppointmentH().setVisible(true);
+    new AppointmentH(userId).setVisible(true);
     }//GEN-LAST:event_jLabel11MouseClicked
 
     /**

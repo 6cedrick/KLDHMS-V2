@@ -547,7 +547,7 @@ private String loggedInType;
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-    new AppointmentH().setVisible(true);
+    new AppointmentH(loggedInId).setVisible(true);
     }//GEN-LAST:event_jLabel11MouseClicked
 
     /**

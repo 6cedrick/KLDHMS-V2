@@ -12,8 +12,10 @@ public class AppointmentH extends javax.swing.JFrame {
     /**
      * Creates new form AppointmentH
      */
-    public AppointmentH() {
+    private int userId;
+    public AppointmentH(int userId) {
         initComponents();
+        this.userId = userId;
     }
 
     /**
@@ -359,7 +361,7 @@ public class AppointmentH extends javax.swing.JFrame {
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-    new settingpersonal(1).setVisible(true);
+    new settingpersonal(userId).setVisible(true);
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
@@ -369,7 +371,7 @@ public class AppointmentH extends javax.swing.JFrame {
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-    new settingsP().setVisible(true);
+    new settingsP(userId).setVisible(true);
     }//GEN-LAST:event_jLabel16MouseClicked
 
     /**
@@ -402,7 +404,7 @@ public class AppointmentH extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AppointmentH().setVisible(true);
+                new AppointmentH(1).setVisible(true);
             }
         });
     }
