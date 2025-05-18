@@ -20,7 +20,57 @@ private int userId;
     public mslot(int userId) {
         initComponents();
         this.userId = userId;
+         updateSlotAvailability();
+        
+        
     }
+    
+    private void updateSlotAvailability() {
+   String day = txtDay.getText(); // Make sure txtDay has the correct day
+String t1 = time1.getText();   // Example: "7:00am to 10:00am"
+String t2 = time2.getText();   // Example: "10:00am to 1:00pm"
+String t3 = time3.getText();   // Example: "1:00pm to 4:00pm"
+
+try {
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kldmass", "root", "");
+    String sql = "SELECT time_slot FROM bookings WHERE day = ?";
+    PreparedStatement pst = con.prepareStatement(sql);
+    pst.setString(1, day);
+    ResultSet rs = pst.executeQuery();
+
+    // Reset slots to available
+    jCheckBox3.setEnabled(true);
+    
+
+    jCheckBox4.setEnabled(true);
+    
+
+    jCheckBox6.setEnabled(true);
+    
+
+    // Disable based on what time slot is already booked
+    while (rs.next()) {
+        String bookedSlot = rs.getString("time_slot");
+
+        if (bookedSlot.equals(t1)) {
+            jCheckBox3.setEnabled(false);
+            Status1.setText("Booked");
+        }
+        if (bookedSlot.equals(t2)) {
+            jCheckBox4.setEnabled(false);
+            Status2.setText("Booked");
+        }
+        if (bookedSlot.equals(t3)) {
+            jCheckBox6.setEnabled(false);
+            Status3.setText("Booked");
+        }
+    }
+
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(this, "Error loading slot availability: " + e.getMessage());
+}
+
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,23 +84,23 @@ private int userId;
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        time1 = new javax.swing.JLabel();
         jCheckBox3 = new javax.swing.JCheckBox();
-        jLabel3 = new javax.swing.JLabel();
+        time2 = new javax.swing.JLabel();
         jCheckBox4 = new javax.swing.JCheckBox();
-        jLabel7 = new javax.swing.JLabel();
+        time3 = new javax.swing.JLabel();
         jCheckBox6 = new javax.swing.JCheckBox();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        Status1 = new javax.swing.JLabel();
+        Status3 = new javax.swing.JLabel();
+        Status2 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        txtDay = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        txtDR = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,8 +109,8 @@ private int userId;
 
         jPanel5.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("7:00am to 10:00am");
+        time1.setForeground(new java.awt.Color(255, 255, 255));
+        time1.setText("7:00am to 8:00am");
 
         jCheckBox3.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox3.setText("BOOK ");
@@ -70,8 +120,8 @@ private int userId;
             }
         });
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("7:00am to 10:00am");
+        time2.setForeground(new java.awt.Color(255, 255, 255));
+        time2.setText("8:00am to 9:00am");
 
         jCheckBox4.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox4.setText("BOOK ");
@@ -81,8 +131,8 @@ private int userId;
             }
         });
 
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("7:00am to 10:00am");
+        time3.setForeground(new java.awt.Color(255, 255, 255));
+        time3.setText("9:00am to 10:00am");
 
         jCheckBox6.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox6.setText("BOOK ");
@@ -92,21 +142,21 @@ private int userId;
             }
         });
 
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Available");
+        Status1.setForeground(new java.awt.Color(255, 255, 255));
+        Status1.setText("Available");
 
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Available");
+        Status3.setForeground(new java.awt.Color(255, 255, 255));
+        Status3.setText("Available");
 
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Available");
+        Status2.setForeground(new java.awt.Color(255, 255, 255));
+        Status2.setText("Available");
 
         jLabel11.setText("Time");
 
         jLabel12.setText("Status");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Monday");
+        txtDay.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        txtDay.setText("Monday");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -114,14 +164,14 @@ private int userId;
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -146,9 +196,9 @@ private int userId;
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel7)
+                    .addComponent(time1)
+                    .addComponent(time2)
+                    .addComponent(time3)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(268, 268, 268)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,9 +207,9 @@ private int userId;
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel10))
+                            .addComponent(Status3)
+                            .addComponent(Status1)
+                            .addComponent(Status2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBox6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,19 +241,19 @@ private int userId;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(time1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(time2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(time3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Status1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Status2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Status3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -213,8 +263,8 @@ private int userId;
 
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\doctor2.png")); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel5.setText("Dr. Strange Lumaad");
+        txtDR.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        txtDR.setText("Dr. McGylle Lumaad");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel13.setText("Neurologist");
@@ -227,20 +277,24 @@ private int userId;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel13))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel13)
+                        .addContainerGap(358, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtDR)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -315,33 +369,62 @@ private int userId;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          if (selectedSlot == null) {
-        JOptionPane.showMessageDialog(this, "Please select a time slot.");
+    JOptionPane.showMessageDialog(this, "Please select a time slot.");
+    return;
+}
+
+try {
+    String doctor = txtDR.getText();
+    String date = java.time.LocalDate.now().toString();
+    String day = txtDay.getText();
+    int userID = userId;
+
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kldmass", "root", "");
+
+    // ❌ Check if user already booked same day and time
+    String checkUserSql = "SELECT * FROM bookings WHERE user_id = ? AND day = ? AND time_slot = ?";
+    PreparedStatement checkUserPst = con.prepareStatement(checkUserSql);
+    checkUserPst.setInt(1, userID);
+    checkUserPst.setString(2, day);
+    checkUserPst.setString(3, selectedSlot);
+    ResultSet userRs = checkUserPst.executeQuery();
+
+    if (userRs.next()) {
+        JOptionPane.showMessageDialog(this, "You already have a booking for this time slot.");
         return;
     }
 
-    try {
-        String doctor = "Dr. Strange Lumaad";
-        String date = java.time.LocalDate.now().toString();
-        int userID = userId; // Replace with dynamic value if needed
+    // ❌ Check if slot is taken by anyone
+    String checkSlotSql = "SELECT * FROM bookings WHERE day = ? AND time_slot = ?";
+    PreparedStatement checkSlotPst = con.prepareStatement(checkSlotSql);
+    checkSlotPst.setString(1, day);
+    checkSlotPst.setString(2, selectedSlot);
+    ResultSet slotRs = checkSlotPst.executeQuery();
 
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kldmass", "root", "");
-        String sql = "INSERT INTO bookings (user_id, doctor_name, date, time_slot, status) VALUES (?, ?, ?, ?, 'Confirmed')";
-        PreparedStatement pst = con.prepareStatement(sql);
-        pst.setInt(1, userID);
-        pst.setString(2, doctor);
-        pst.setString(3, date);
-        pst.setString(4, selectedSlot);
-
-        pst.executeUpdate();
-        JOptionPane.showMessageDialog(this, "Booking confirmed!");
-
-        // Optionally go to next page or reset
-        this.setVisible(false);
-        new receipt().setVisible(true);
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Error booking: " + e.getMessage());
+    if (slotRs.next()) {
+        JOptionPane.showMessageDialog(this, "This time slot is already taken. Please choose another.");
+        return;
     }
+
+    // ✅ Insert booking with 'day'
+    String sql = "INSERT INTO bookings (user_id, doctor_name, date, day, time_slot, status) VALUES (?, ?, ?, ?, ?, 'Confirmed')";
+    PreparedStatement pst = con.prepareStatement(sql);
+    pst.setInt(1, userID);
+    pst.setString(2, doctor);
+    pst.setString(3, date);
+    pst.setString(4, day);
+    pst.setString(5, selectedSlot);
+
+    pst.executeUpdate();
+    JOptionPane.showMessageDialog(this, "Booking confirmed!");
+
+    this.setVisible(false);
+    new receipt().setVisible(true);
+
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(this, "Error booking: " + e.getMessage());
+}
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -386,26 +469,26 @@ private int userId;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Status1;
+    private javax.swing.JLabel Status2;
+    private javax.swing.JLabel Status3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel time1;
+    private javax.swing.JLabel time2;
+    private javax.swing.JLabel time3;
+    private javax.swing.JLabel txtDR;
+    private javax.swing.JLabel txtDay;
     // End of variables declaration//GEN-END:variables
 }

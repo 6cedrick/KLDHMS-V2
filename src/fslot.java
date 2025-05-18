@@ -2,6 +2,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -49,7 +50,7 @@ private int userId;
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        txtDay = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -108,8 +109,8 @@ private int userId;
 
         jLabel12.setText("Status");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Tuesday");
+        txtDay.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        txtDay.setText("Tuesday");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -117,14 +118,14 @@ private int userId;
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -306,33 +307,61 @@ private int userId;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (selectedSlot == null) {
-        JOptionPane.showMessageDialog(this, "Please select a time slot.");
+    JOptionPane.showMessageDialog(this, "Please select a time slot.");
+    return;
+}
+
+try {
+    String doctor = DrName.getText();
+    String date = java.time.LocalDate.now().toString();
+    String day = txtDay.getText();
+    int userID = userId;
+
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kldmass", "root", "");
+
+    // ❌ Check if user already booked same day and time
+    String checkUserSql = "SELECT * FROM bookings WHERE user_id = ? AND day = ? AND time_slot = ?";
+    PreparedStatement checkUserPst = con.prepareStatement(checkUserSql);
+    checkUserPst.setInt(1, userID);
+    checkUserPst.setString(2, day);
+    checkUserPst.setString(3, selectedSlot);
+    ResultSet userRs = checkUserPst.executeQuery();
+
+    if (userRs.next()) {
+        JOptionPane.showMessageDialog(this, "You already have a booking for this time slot.");
         return;
     }
 
-    try {
-        String doctor = DrName.getName();
-        String date = java.time.LocalDate.now().toString();
-        int userID = userId; // Replace with dynamic value if needed
+    // ❌ Check if slot is taken by anyone
+    String checkSlotSql = "SELECT * FROM bookings WHERE day = ? AND time_slot = ?";
+    PreparedStatement checkSlotPst = con.prepareStatement(checkSlotSql);
+    checkSlotPst.setString(1, day);
+    checkSlotPst.setString(2, selectedSlot);
+    ResultSet slotRs = checkSlotPst.executeQuery();
 
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kldmass", "root", "");
-        String sql = "INSERT INTO bookings (user_id, doctor_name, date, time_slot, status) VALUES (?, ?, ?, ?, 'Confirmed')";
-        PreparedStatement pst = con.prepareStatement(sql);
-        pst.setInt(1, userID);
-        pst.setString(2, doctor);
-        pst.setString(3, date);
-        pst.setString(4, selectedSlot);
-
-        pst.executeUpdate();
-        JOptionPane.showMessageDialog(this, "Booking confirmed!");
-
-        // Optionally go to next page or reset
-        this.setVisible(false);
-        new receipt().setVisible(true);
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Error booking: " + e.getMessage());
+    if (slotRs.next()) {
+        JOptionPane.showMessageDialog(this, "This time slot is already taken. Please choose another.");
+        return;
     }
+
+    // ✅ Insert booking with 'day'
+    String sql = "INSERT INTO bookings (user_id, doctor_name, date, day, time_slot, status) VALUES (?, ?, ?, ?, ?, 'Confirmed')";
+    PreparedStatement pst = con.prepareStatement(sql);
+    pst.setInt(1, userID);
+    pst.setString(2, doctor);
+    pst.setString(3, date);
+    pst.setString(4, day);
+    pst.setString(5, selectedSlot);
+
+    pst.executeUpdate();
+    JOptionPane.showMessageDialog(this, "Booking confirmed!");
+
+    this.setVisible(false);
+    new receipt().setVisible(true);
+
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(this, "Error booking: " + e.getMessage());
+}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -383,7 +412,6 @@ private int userId;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -397,5 +425,6 @@ private int userId;
     private javax.swing.JLabel time1;
     private javax.swing.JLabel time2;
     private javax.swing.JLabel time3;
+    private javax.swing.JLabel txtDay;
     // End of variables declaration//GEN-END:variables
 }

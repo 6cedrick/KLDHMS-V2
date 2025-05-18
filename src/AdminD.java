@@ -15,11 +15,11 @@ public class AdminD extends javax.swing.JFrame {
     /**
      * Creates new form AdminD
      */
-    private int userId;
-    public AdminD(int userId) {
+    
+    public AdminD() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        this.userId = userId;
+       
     }
 
     /**
@@ -297,13 +297,13 @@ public class AdminD extends javax.swing.JFrame {
     private void jLabel47MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel47MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new Admin(userId).setVisible(true);
+        new Admin().setVisible(true);
     }//GEN-LAST:event_jLabel47MouseClicked
 
     private void jLabel49MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel49MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new AdminD(userId).setVisible(true);
+        new AdminD().setVisible(true);
     }//GEN-LAST:event_jLabel49MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -344,7 +344,7 @@ public class AdminD extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminD(1).setVisible(true);
+                new AdminD().setVisible(true);
             }
         });
     }

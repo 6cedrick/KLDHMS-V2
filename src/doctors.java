@@ -64,7 +64,7 @@ item2.addActionListener(e -> {
 });
 item3.addActionListener(e -> {
     this.setVisible(false);
-    new Admin(userId).setVisible(true);
+    new Admin().setVisible(true);
 });
 item4.addActionListener(e -> {
     this.setVisible(false);

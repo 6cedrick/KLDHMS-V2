@@ -23,43 +23,106 @@ public class AdminAccounts extends javax.swing.JFrame {
      */
     public AdminAccounts() {
         initComponents();
-         DefaultTableModel model = new DefaultTableModel(new String[]{"Email", "Full Name", "Age", "KldID"}, 0);
-        jTable1.setModel(model);
+        connect();
+        loadCheckupData(); 
+       
         
     }
         
     public void searchUser(String keyword) {
-    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    model.setRowCount(0); // Clear old data
+   DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+model.setColumnIdentifiers(new String[] {
+    "KLD Email", "Full Name", "First Name", "Last Name", "Age", "KLD ID"
+});
+model.setRowCount(0); // Clear old data
 
-    try {
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/kldmass", "root", "");
-        String sql = "SELECT ua.KldEmail, ui.FullName, ui.Age, ui.KldID " +
-                     "FROM useraccount ua " +
-                     "JOIN userinfo ui ON ua.KldID = ui.KldID " +
-                     "WHERE ui.FullName LIKE ? OR ua.KldEmail LIKE ?";
-        PreparedStatement pst = con.prepareStatement(sql);
-        pst.setString(1, "%" + keyword + "%");
-        pst.setString(2, "%" + keyword + "%");
+try {
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost/kldmass", "root", "");
+    String sql = "SELECT ua.KldEmail, ui.FullName, ui.F_Name, ui.L_Name, ui.Age, ui.KldID " +
+                 "FROM useraccount ua " +
+                 "JOIN userinfo ui ON ua.UserID = ui.UserID " +
+                 "WHERE ui.FullName LIKE ? OR ua.KldEmail LIKE ?";
+    PreparedStatement pst = con.prepareStatement(sql);
+    pst.setString(1, "%" + keyword + "%");
+    pst.setString(2, "%" + keyword + "%");
 
-        ResultSet rs = pst.executeQuery();
+    ResultSet rs = pst.executeQuery();
 
-        while (rs.next()) {
-            String email = rs.getString("KldEmail");
-            String fullName = rs.getString("FullName");
-            int age = rs.getInt("Age");
-            String kldID = rs.getString("KldID");
+    while (rs.next()) {
+        String email = rs.getString("KldEmail");
+        String fullName = rs.getString("FullName");
+        String Fname = rs.getString("F_Name");
+        String Lname = rs.getString("L_Name");
+        int age = rs.getInt("Age");
+        String kldID = rs.getString("KldID");
 
-            model.addRow(new Object[]{email, fullName, age, kldID});
-        }
-
-        con.close();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Search Error: " + e.getMessage());
+        model.addRow(new Object[]{email, fullName, Fname, Lname, age, kldID});
     }
+
+    con.close();
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, "Search Error: " + e.getMessage());
 }
 
-    
+}
+private Connection connect() {
+    try {
+        String url = "jdbc:mysql://localhost:3306/kldmass";
+        String user = "root"; // 🔁 your MySQL username
+        String password = ""; // 🔁 your MySQL password
+        return DriverManager.getConnection(url, user, password);
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
+    private void loadCheckupData() {
+     DefaultTableModel model = new DefaultTableModel();
+model.setColumnIdentifiers(new String[] {
+    "KLD Email", "First Name", "Last Name", "Full Name", "Age", "KLD ID"
+});
+
+   String query = """
+    SELECT 
+        b.KldEmail AS "KLD Email",
+        ui.F_Name AS "First Name",
+        ui.L_Name AS "Last Name",
+        ui.FullName AS "Full Name",
+        ui.Age,
+        ui.KldID AS "KLD ID"
+    FROM 
+        useraccount b
+    JOIN 
+        userinfo ui ON b.UserID = ui.UserID
+""";
+
+    try (Connection conn = connect();
+     PreparedStatement pst = conn.prepareStatement(query);
+     ResultSet rs = pst.executeQuery()) {
+
+    boolean hasRows = false;
+
+    while (rs.next()) {
+        hasRows = true;
+        System.out.println("Loaded: " + rs.getString("Full Name"));
+        model.addRow(new Object[]{
+            rs.getString("KLD Email"),
+            rs.getString("First Name"),
+            rs.getString("Last Name"),
+            rs.getString("Full Name"),
+            rs.getInt("Age"),
+            rs.getString("KLD ID")
+        });
+    }
+
+    if (!hasRows) {
+        System.out.println("No records found.");
+    }
+     jTable1.setModel(model);
+} catch (SQLException e) {
+    e.printStackTrace();
+}
+    }
    
 
     /**
@@ -145,6 +208,11 @@ public class AdminAccounts extends javax.swing.JFrame {
         );
 
         jPanel22.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel22MouseClicked(evt);
+            }
+        });
 
         jLabel77.setBackground(new java.awt.Color(0, 0, 0));
         jLabel77.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -182,6 +250,11 @@ public class AdminAccounts extends javax.swing.JFrame {
         jLabel80.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel80.setForeground(new java.awt.Color(0, 0, 0));
         jLabel80.setText("Doctors");
+        jLabel80.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel80MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
@@ -284,13 +357,13 @@ public class AdminAccounts extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Email", "Name", "Age", "KLD ID"
+                "KLD Email", "First Name", "Last Name", "Full Name", "Age", "KLD ID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -353,6 +426,17 @@ public class AdminAccounts extends javax.swing.JFrame {
         String keyword = txtSearch.getText().trim();
         searchUser(keyword);
     }//GEN-LAST:event_btnSearchMouseClicked
+
+    private void jPanel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel22MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new reports().setVisible(true);
+    }//GEN-LAST:event_jPanel22MouseClicked
+
+    private void jLabel80MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel80MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jLabel80MouseClicked
 
     
     public static void main(String args[]) {

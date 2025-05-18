@@ -271,39 +271,46 @@ public class login extends javax.swing.JFrame {
     private void bloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloginActionPerformed
         // TODO add your handling code here:
 String KldEmail = jtuser.getText();
-    String password = new String(jpassword.getPassword());
+String password = new String(jpassword.getPassword());
 
-    if (KldEmail.equals("")) {
+if (KldEmail.equals("")) {
     JOptionPane.showMessageDialog(null, "Please Enter a KLD Email");
 } else if (password.equals("")) {
     JOptionPane.showMessageDialog(null, "Please enter a password!");
 } else {
     try {
-        // First, check in useraccount
-        String queryUser = "SELECT * FROM useraccount WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";
-        var rsUser = st.executeQuery(queryUser);
-
-        if (rsUser.next()) {
-            int userId = rsUser.getInt("UserID");
+        // ✅ Check if admin
+        if (KldEmail.equals("admin") && password.equals("admin123")) {
             this.setVisible(false);
-            new homep(userId).setVisible(true);  // ✅ Launch user home with ID
+            new Admin().setVisible(true);  // ✅ Open admin page
         } else {
-            // Check doctor_accounts if not in useraccount
-            String queryDoctor = "SELECT * FROM doctor_accounts WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";
-            var rsDoctor = st.executeQuery(queryDoctor);
+            // First, check in useraccount
+            String queryUser = "SELECT * FROM useraccount WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";
+            var rsUser = st.executeQuery(queryUser);
 
-            if (rsDoctor.next()) {
-                int doctorId = rsDoctor.getInt("doctor_id");
+            if (rsUser.next()) {
+                int userId = rsUser.getInt("UserID");
                 this.setVisible(false);
-                new doctorH(doctorId).setVisible(true);  // ✅ Launch doctor home with ID
+                new homep(userId).setVisible(true);  // ✅ Launch user home with ID
             } else {
-                JOptionPane.showMessageDialog(null, "Wrong Email or Password");
+                // Check doctor_accounts if not in useraccount
+                String queryDoctor = "SELECT * FROM doctor_accounts WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";
+                var rsDoctor = st.executeQuery(queryDoctor);
+
+                if (rsDoctor.next()) {
+                    int doctorId = rsDoctor.getInt("doctor_id");
+                    this.setVisible(false);
+                    new doctorH(doctorId).setVisible(true);  // ✅ Launch doctor home with ID
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong Email or Password");
+                }
             }
         }
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, "Database error: " + ex.getMessage());
     }
 }
+
     }//GEN-LAST:event_bloginActionPerformed
 
     private void showActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showActionPerformed

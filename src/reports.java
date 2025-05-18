@@ -17,9 +17,7 @@ public class reports extends javax.swing.JFrame {
     /**
      * Creates new form reports
      */
-    private int userId;
-    public reports(int userId) {
-          this.userId = userId;
+    public reports() {
         initComponents();
         loadCheckupData();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -38,33 +36,31 @@ public class reports extends javax.swing.JFrame {
     }
 }
     private void loadCheckupData() {
-    DefaultTableModel model = new DefaultTableModel();
+      DefaultTableModel model = new DefaultTableModel();
     model.setColumnIdentifiers(new String[] {
-        "Student Name", "Age", "Date", "Time Slot", "Doctor"
+        "Student Name", "Age", "Date","day", "Time Slot", "Doctor",
     });
 
-   String query = """
-    SELECT 
-        ui.FullName AS student_name,
-        ui.Age,
-        b.date,
-        b.time_slot,
-        b.doctor_name
-    FROM 
-        bookings b
-    JOIN 
-        userinfo ui ON b.user_id = ui.UserID
-    WHERE 
-        b.user_id = ?
-""";
-
+    String query = """
+        SELECT 
+            ui.FullName AS student_name,
+            ui.Age,
+            b.date,
+                   b.Day,
+            b.time_slot,
+            b.doctor_name
+            
+                   
+        FROM 
+            bookings b
+        JOIN 
+            userinfo ui ON b.user_id = ui.UserID
+    """;
 
     try (Connection conn = connect();
-     PreparedStatement pst = conn.prepareStatement(query)) {
+         PreparedStatement pst = conn.prepareStatement(query);
+         ResultSet rs = pst.executeQuery()) {
 
-    pst.setInt(1, userId);  // ✅ Move this inside the try block
-
-    try (ResultSet rs = pst.executeQuery()) {
         boolean hasRows = false;
 
         while (rs.next()) {
@@ -74,8 +70,10 @@ public class reports extends javax.swing.JFrame {
                 rs.getString("student_name"),
                 rs.getInt("Age"),
                 rs.getDate("date"),
+                rs.getString("Day"),
                 rs.getString("time_slot"),
                 rs.getString("doctor_name")
+               
             });
         }
 
@@ -84,11 +82,10 @@ public class reports extends javax.swing.JFrame {
         }
 
         jTable1.setModel(model);
-    }
 
-} catch (SQLException e) {
-    e.printStackTrace();
-}
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
     }
 
     /**
@@ -134,13 +131,13 @@ public class reports extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Patient", "Date", "Time", "Status"
+                "Patient", "Date", "Day", "Time", "Status"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -382,13 +379,13 @@ public class reports extends javax.swing.JFrame {
     private void jLabel47MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel47MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-    new Admin(userId).setVisible(true);
+    new Admin().setVisible(true);
     }//GEN-LAST:event_jLabel47MouseClicked
 
     private void jLabel49MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel49MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-    new AdminD(userId).setVisible(true);
+    new AdminD().setVisible(true);
     }//GEN-LAST:event_jLabel49MouseClicked
 
     /**
@@ -421,7 +418,7 @@ public class reports extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new reports(1).setVisible(true);
+                new reports().setVisible(true);
             }
         });
     }

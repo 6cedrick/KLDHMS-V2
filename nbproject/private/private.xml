@@ -3,20 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/login.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/signup.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/homep.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/slots.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/doctors.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/aboutUS.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/contactUS.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/receipt.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/Admin.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/reports.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/AdminAccounts.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/settingsP.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/AppointmentH.java</file>
-            <file>file:/D:/CODE%20RED/KLD_MED_SCHED/KLDHMS-V2/src/DeleteAcc.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/homep.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/contactUS.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/signup.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/DeleteAcc.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/login.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/settingsP.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/doctors.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/Admin.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/ChangePWpopup.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/slots.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/settingpersonal.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/reports.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/AdminAccounts.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/doctorH.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/aboutUS.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/wslot.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/mslot.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/fslot.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/AppointmentH.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/AppointmentHistory.java</file>
+            <file>file:/C:/Users/6scee/Documents/NetBeansProjects/KLD_MED_SCHED/src/AdminD.java</file>
         </group>
     </open-files>
 </project-private>
