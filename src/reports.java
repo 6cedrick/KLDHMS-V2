@@ -176,6 +176,11 @@ public class reports extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
 
         jLabel38.setBackground(new java.awt.Color(0, 0, 0));
         jLabel38.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -252,6 +257,11 @@ public class reports extends javax.swing.JFrame {
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
 
         jLabel42.setBackground(new java.awt.Color(0, 0, 0));
         jLabel42.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -289,6 +299,11 @@ public class reports extends javax.swing.JFrame {
         );
 
         jPanel24.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel24.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel24MouseClicked(evt);
+            }
+        });
 
         jLabel83.setBackground(new java.awt.Color(0, 0, 0));
         jLabel83.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -405,6 +420,27 @@ public class reports extends javax.swing.JFrame {
 
         new homep(1).setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+
+        new Admin().setVisible(true);
+    }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+
+        new doctors(1).setVisible(true);
+    }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void jPanel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel24MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+
+        new AdminAccounts().setVisible(true);
+    }//GEN-LAST:event_jPanel24MouseClicked
 
     /**
      * @param args the command line arguments

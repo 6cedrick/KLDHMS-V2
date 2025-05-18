@@ -171,6 +171,11 @@ model.setColumnIdentifiers(new String[] {
 
         jPanel21.setBackground(new java.awt.Color(255, 255, 255));
         jPanel21.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel21.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel21MouseClicked(evt);
+            }
+        });
 
         jLabel74.setBackground(new java.awt.Color(0, 0, 0));
         jLabel74.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -246,6 +251,11 @@ model.setColumnIdentifiers(new String[] {
         );
 
         jPanel23.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel23MouseClicked(evt);
+            }
+        });
 
         jLabel80.setBackground(new java.awt.Color(0, 0, 0));
         jLabel80.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -455,6 +465,20 @@ model.setColumnIdentifiers(new String[] {
 
         new homep(1).setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jPanel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel21MouseClicked
+        // TODO add your handling code here:\
+        this.setVisible(false);
+
+        new Admin().setVisible(true);
+    }//GEN-LAST:event_jPanel21MouseClicked
+
+    private void jPanel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel23MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+
+        new AdminD().setVisible(true);
+    }//GEN-LAST:event_jPanel23MouseClicked
 
     
     public static void main(String args[]) {
