@@ -10,6 +10,7 @@
  */
 import java.sql.*;
 import java.sql.Connection;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 public class AddDoctors extends javax.swing.JFrame {
 
@@ -18,6 +19,8 @@ public class AddDoctors extends javax.swing.JFrame {
      */
     public AddDoctors() {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
          loadSpecializations();
     }
     private Connection connect() {
@@ -96,18 +99,43 @@ private void loadSpecializations() {
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 0));
 
+        kld.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        kld.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Last Name");
 
+        Fname.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Fname.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("First Name");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("LicenseID");
 
+        Lname.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lname.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("KLD EMAIL");
 
+        Lid.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lid.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Password");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("re-enter pasword");
 
+        sp.setForeground(new java.awt.Color(255, 255, 255));
         sp.setText("Show password");
         sp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +143,13 @@ private void loadSpecializations() {
             }
         });
 
+        pass.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        pass.setForeground(new java.awt.Color(0, 0, 0));
+
+        pass2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        pass2.setForeground(new java.awt.Color(0, 0, 0));
+
+        Specialization.setForeground(new java.awt.Color(255, 255, 255));
         Specialization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Psychiatrist", "Nursing", "Dentistry", " " }));
         Specialization.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +164,8 @@ private void loadSpecializations() {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Department");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

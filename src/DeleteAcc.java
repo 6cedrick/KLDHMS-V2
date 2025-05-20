@@ -16,7 +16,9 @@ public class DeleteAcc extends javax.swing.JFrame {
     public DeleteAcc(int userId) {
         this.userId = userId;
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        
         jButton1.addActionListener(e -> deleteAccount());
     }
     /**

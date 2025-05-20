@@ -396,7 +396,7 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
     }//GEN-LAST:event_bookingmondayMouseClicked
 
     private void bookingmondayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingmondayActionPerformed
- this.setVisible(false);
+ 
     new wslot(userId).setVisible(true);               
 
        
@@ -441,6 +441,7 @@ new mslot(userId).setVisible(true);
 
     private void bookingfridayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingfridayMouseClicked
         // TODO add your handling code here:
+        new fslot(userId).setVisible(true);
     }//GEN-LAST:event_bookingfridayMouseClicked
 
     private void bookingfridayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingfridayActionPerformed

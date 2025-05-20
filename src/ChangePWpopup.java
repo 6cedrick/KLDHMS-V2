@@ -14,6 +14,8 @@ public class ChangePWpopup extends javax.swing.JFrame {
      */
     public ChangePWpopup() {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     /**

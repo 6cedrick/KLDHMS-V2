@@ -54,16 +54,16 @@ jPopupMenu2.add(item5);
 
 // Action listeners
 item1.addActionListener(e -> {
-    this.setVisible(false);
+    
     new aboutUS().setVisible(true);
 });
 item2.addActionListener(e -> {
-    this.setVisible(false);
+    
     new contactUS().setVisible(true);
 });
 item4.addActionListener(e -> {
-    this.setVisible(false);
-    new settingsP(userId).setVisible(true);
+    
+    new settingpersonal(userId).setVisible(true);
 });
 item5.addActionListener(e -> {
     this.setVisible(false);

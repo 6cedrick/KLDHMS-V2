@@ -19,6 +19,8 @@ public class mslot extends javax.swing.JFrame {
 private int userId;
     public mslot(int userId) {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
         this.userId = userId;
          updateSlotAvailability();
         

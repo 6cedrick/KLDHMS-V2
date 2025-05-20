@@ -24,6 +24,8 @@ public class fslot extends javax.swing.JFrame {
 private int userId;
     public fslot(int userId) {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
         this.userId = userId;
     }
 

@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +24,7 @@ public class AdminAccounts extends javax.swing.JFrame {
      */
     public AdminAccounts() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH); 
         connect();
         loadCheckupData(); 
        
