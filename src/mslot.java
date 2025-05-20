@@ -264,7 +264,7 @@ try {
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\doctor2.png")); // NOI18N
 
         txtDR.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        txtDR.setText("Dr. McGylle Lumaad");
+        txtDR.setText("Dr. Joseph Pujante");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel13.setText("Neurologist");
@@ -281,7 +281,7 @@ try {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jLabel13)
-                        .addContainerGap(358, Short.MAX_VALUE))
+                        .addContainerGap(395, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -332,7 +332,7 @@ try {
         if (jCheckBox3.isSelected()) {
         jCheckBox4.setEnabled(false);
         jCheckBox6.setEnabled(false);
-        selectedSlot = "7:00am to 10:00am";
+        selectedSlot = time1.getText();
     } else {
         jCheckBox4.setEnabled(true);
         jCheckBox6.setEnabled(true);
@@ -345,7 +345,7 @@ try {
          if (jCheckBox4.isSelected()) {
         jCheckBox3.setEnabled(false);
         jCheckBox6.setEnabled(false);
-        selectedSlot = "7:00am to 10:00am";
+        selectedSlot = time2.getText();
     } else {
         jCheckBox3.setEnabled(true);
         jCheckBox6.setEnabled(true);
@@ -358,7 +358,7 @@ try {
          if (jCheckBox6.isSelected()) {
         jCheckBox3.setEnabled(false);
         jCheckBox4.setEnabled(false);
-        selectedSlot = "7:00am to 10:00am";
+        selectedSlot = time3.getText();
     } else {
         jCheckBox4.setEnabled(true);
         jCheckBox3.setEnabled(true);

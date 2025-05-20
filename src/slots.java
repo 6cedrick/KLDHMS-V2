@@ -29,13 +29,12 @@ public class slots extends javax.swing.JFrame {
 // Initialize and add menu items
 JMenuItem item1 = new JMenuItem("About Us");
 JMenuItem item2 = new JMenuItem("Contact Us");
-JMenuItem item3 = new JMenuItem("Admin Panel");
 JMenuItem item4 = new JMenuItem("Settings");
 JMenuItem item5 = new JMenuItem("Logout");
 
 // Set font
 java.awt.Font menuFont = new java.awt.Font("Arial", java.awt.Font.PLAIN, 18);
-for (JMenuItem item : new JMenuItem[]{item1, item2, item3, item4, item5}) {
+for (JMenuItem item : new JMenuItem[]{item1, item2,item4, item5}) {
     item.setFont(menuFont);
 }
 
@@ -47,9 +46,7 @@ emptyItem.setPreferredSize(new java.awt.Dimension(150, 70));
 // Add items
 jPopupMenu2.add(item1);
 jPopupMenu2.add(item2);
-jPopupMenu2.add(item3);
 jPopupMenu2.add(item4);
-jPopupMenu2.add(emptyItem);
 jPopupMenu2.add(item5);
 
 // Action listeners
@@ -61,10 +58,7 @@ item2.addActionListener(e -> {
     this.setVisible(false);
     new contactUS().setVisible(true);
 });
-item3.addActionListener(e -> {
-    this.setVisible(false);
-    new Admin().setVisible(true);
-});
+
 item4.addActionListener(e -> {
     this.setVisible(false);
     new settingsP(userId).setVisible(true);
@@ -435,17 +429,12 @@ Menubar.addMouseListener(new java.awt.event.MouseAdapter() {
     }//GEN-LAST:event_MenubarMouseClicked
 
     private void bookingwednesdayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingwednesdayMouseClicked
-        // TODO add your handling code here:
-        this.setVisible(false);
-
-        new mslot(userId).setVisible(true);
+        
     }//GEN-LAST:event_bookingwednesdayMouseClicked
 
     private void bookingwednesdayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingwednesdayActionPerformed
         // TODO add your handling code here:
-      this.setVisible(false);
-
-       
+      
 new mslot(userId).setVisible(true);
 
     }//GEN-LAST:event_bookingwednesdayActionPerformed

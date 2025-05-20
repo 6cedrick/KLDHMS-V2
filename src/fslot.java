@@ -218,7 +218,7 @@ private int userId;
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\6scee\\Documents\\NetBeansProjects\\KLD_MED_SCHED\\images\\doctor2.png")); // NOI18N
 
         DrName.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        DrName.setText("Dr. Strange Lumaad");
+        DrName.setText("Dr. Cedrick G");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel13.setText("Neurologist");

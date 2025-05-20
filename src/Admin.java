@@ -155,6 +155,11 @@ public class Admin extends javax.swing.JFrame {
         jLabel42.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(0, 0, 0));
         jLabel42.setText("Doctors");
+        jLabel42.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel42MouseClicked(evt);
+            }
+        });
 
         jLabel49.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -332,7 +337,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
 
-        new doctors(1).setVisible(true);
+        new AdminD().setVisible(true);
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void jPanel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel24MouseClicked
@@ -341,6 +346,10 @@ public class Admin extends javax.swing.JFrame {
 
         new AdminAccounts().setVisible(true);
     }//GEN-LAST:event_jPanel24MouseClicked
+
+    private void jLabel42MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel42MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel42MouseClicked
 
     /**
      * @param args the command line arguments

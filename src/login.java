@@ -282,7 +282,7 @@ if (KldEmail.equals("")) {
         // ✅ Check if admin
         if (KldEmail.equals("admin") && password.equals("admin123")) {
             this.setVisible(false);
-            new Admin().setVisible(true);  // ✅ Open admin page
+            new reports().setVisible(true);  // ✅ Open admin page
         } else {
             // First, check in useraccount
             String queryUser = "SELECT * FROM useraccount WHERE KldEmail='" + KldEmail + "' AND Password='" + password + "'";

@@ -328,7 +328,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="48" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Dr. Strange Lumaad"/>
+            <Property name="text" type="java.lang.String" value="Dr. Cedrick G"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">

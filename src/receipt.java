@@ -105,6 +105,8 @@ public class receipt extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
+        
+        new slots().setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
